@@ -1,0 +1,281 @@
+/* Reset styles */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar layout */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background: linear-gradient(to right, #B4B8B2, #87CEFA, #B4B8B2);
+    color: white;
+}
+
+/* Logo and text styling */
+.logo-container {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.logo {
+    height: 50px;
+    margin-right: 15px;
+}
+
+.logo-text {
+    font-size: 16px;
+    color: white;
+}
+
+.logo-text p:last-child {
+    font-size: 14px;
+    color: black;
+}
+
+/* Dropdown styling */
+.dropdown {
+    position: relative;
+    margin-left: 1px;
+    margin-right: 10px;
+}
+
+.dropdown-toggle {
+    background-color: #444;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: #444;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    min-width: 150px;
+    z-index: 1000;
+}
+
+.dropdown-menu li {
+    width: 100%;
+}
+
+.dropdown-menu li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 10px 15px;
+}
+
+.dropdown-menu li a:hover {
+    background-color: #555;
+}
+
+/* Show dropdown menu on hover */
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* Section for events */
+.event-section {
+    padding: 1px 0; /* Reduced padding for smaller section */
+    text-align: center;
+    background: #f9f9f9;
+}
+
+.section-title {
+    font-size: 2em; /* Slightly reduced size */
+    font-weight: bold;
+    margin-bottom: 5px; /* Reduced margin */
+}
+
+.section-description {
+    font-size: 1em; /* Reduced font size */
+    color: #555;
+    margin-bottom: 5px; /* Reduced margin */
+}
+
+/* Container layout */
+.section-container {
+    min-height: 20vh; /* Reduced height */
+    width: 100%;
+    font-size: 16px;
+    background: #eee;
+    color: #777;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* Events container styling */
+.events-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px; /* Adds generous spacing between event cards */
+    padding: 30px;
+    background: linear-gradient(135deg, #eef2f3, #ffffff);
+}
+
+/* Individual event item */
+.item-container {
+    background: linear-gradient(145deg, #ffffff, #dfe9f3);
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    width: 340px;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.item-container:hover {
+    transform: translateY(-15px); /* Lifts the card more prominently */
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(145deg, #d8e2eb, #ffffff);
+}
+
+/* Event information container */
+.event-info {
+    padding: 25px;
+    text-align: center;
+    background: linear-gradient(135deg, #ffffff, #f3f8fc);
+    border-radius: 15px 15px 0 0;
+}
+
+/* Title styling */
+.title {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: #18537a;
+    margin-bottom: 15px;
+}
+
+/* Separator line */
+.separator {
+    width: 50px;
+    height: 5px;
+    background: linear-gradient(90deg, #18537a, #4fb0d8);
+    margin: 10px auto 20px;
+    border-radius: 5px;
+}
+
+/* Info text */
+.info {
+    font-size: 1em;
+    color: #4f4f4f;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 600;
+}
+
+.info i {
+    color: #18537a;
+    font-size: 1.3em;
+}
+
+.info span {
+    font-weight: bold;
+    color: #18537a;
+}
+
+/* Additional info styling */
+.additional-info {
+    margin-top: 15px;
+    padding: 20px 15px;
+    border-top: 1px solid #eee;
+    background: #f7f9fc;
+    border-radius: 0 0 15px 15px;
+    text-align: left;
+    position: relative;
+}
+
+/* Fee styling */
+.info:nth-child(2) {
+    font-size: 1.2em;
+    color: #2b6777;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Registration date styles */
+.additional-info p {
+    font-size: 1em;
+    color: #555;
+    margin: 8px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.additional-info p span {
+    font-weight: bold;
+    color: #18537a;
+    background: linear-gradient(90deg, #cfeaff, #e8f5ff);
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.additional-info p span:hover {
+    background: linear-gradient(90deg, #18537a, #4fb0d8);
+    color: #fff;
+}
+
+/* Hover ribbon effect for cards */
+.item-container::before {
+    content: "Featured";
+    position: absolute;
+    top: 15px;
+    left: -15px;
+    background: linear-gradient(90deg, #18537a, #4fb0d8);
+    color: #fff;
+    padding: 5px 20px;
+    font-size: 0.9em;
+    font-weight: bold;
+    transform: rotate(-45deg);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+    display: none;
+}
+
+.item-container:hover::before {
+    display: block; /* Show ribbon on hover */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .events-container {
+        gap: 20px;
+        padding: 15px;
+    }
+
+    .item-container {
+        width: 100%;
+    }
+
+    .title {
+        font-size: 1.5em;
+    }
+
+    .info {
+        font-size: 0.9em;
+    }
+
+    .additional-info p {
+        font-size: 0.85em;
+    }
+}

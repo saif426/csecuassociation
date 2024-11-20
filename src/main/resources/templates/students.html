@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Member Sign Up Form</title>
+  <style>
+    /* Resetting default margin and padding */
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Navigation styling */
+    .logo{
+
+      width: 20%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .logo img{
+
+      width: 20%;
+      border: white;
+      border-radius: 20%;
+    }
+    .navbar{
+
+      display: flex;
+      background-color: rgb(146, 194, 205);
+
+
+    }
+    .nav-list {
+
+      display: flex;
+      align-items: center;
+      height: 60px;
+
+
+    }
+    .nav-list li{
+      list-style: none;
+      padding: 30px 30px;
+    }
+    .nav-list  li a{
+
+      text-decoration: none;
+      color: black;
+    }
+    .nav-list  li a:hover{
+      text-decoration: none;
+      color: grey;
+
+    }
+
+    /* Centering container */
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    /* Form styling */
+    form {
+      width: 100px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 2px;
+      background-color: #f9f9f9;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: inline-block;
+      width: 100px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: calc(100% - 100px);
+      padding: 5px;
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      padding: 5px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+<nav class="navbar">
+  <ul class="nav-list">
+    <div class="logo"><img th:src="@{/images/culogo.png}"></div>
+
+    <li><a th:href="@{/index.html}">Home</a></li>
+
+    <li><a th:href="@{/contact}">Contact</a></li>
+    <li><a th:href="@{/showLoginForm}">Log in</a></li>
+  </ul>
+</nav>
+
+<div style="text-align: center;">
+  <h1>Events</h1>
+  <br>
+  <div th:each="event : ${events}" style="text-align: left; margin: 0 auto;">
+    <div style="margin-bottom: 20px;">
+      <h2 th:text="${event.name}"></h2>
+      <p>Event Date: <span th:text="${#dates.format(event.eventDate, 'dd/MM/yyyy')}"></span></p>
+      <p>Registration Start: <span th:text="${#dates.format(event.registrationStart, 'dd/MM/yyyy HH:mm')}"></span></p>
+      <p>Registration End: <span th:text="${#dates.format(event.registrationEnd, 'dd/MM/yyyy HH:mm')}"></span></p>
+      <form th:action="@{/registration}" method="post">
+        <input type="hidden" name="eventId" th:value="${event.id}" />
+        <button type="submit">Register</button>
+      </form>
+
+    </div>
+    <hr/>
+  </div>
+</div>
+
+
+
+</body>
+</html>

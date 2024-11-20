@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Member Sign Up Form</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<nav class="navbar">
+    <ul class="nav-list">
+        <div class="logo"><img th:src="@{/images/culogo.png}"></div>
+
+        <li><a th:href="@{/login}">Home</a></li>
+
+        <li><a th:href="@{/contact}">Contact</a></li>
+        <li><a th:href="@{/login}">Log out</a></li>
+    </ul>
+</nav>
+<section class="background2 second">
+    <div class="content1">
+        <img th:src="@{/bg3.jpg}" alt="Member Image">
+        <div class="member">
+            <h2>Member</h2>
+            <p>Our CSE CU Association aims to foster a sense of community among Computer Science students at our university. Every first-semester student is required to register as a member by contributing a specified amount to the CSE CU Association Fund. This fund serves as a collective resource for initiatives dedicated to enhancing our faculty's environment and educational experience.</p>
+            <a th:href="@{/userShow}"><button type="button">Members list</button></a>
+        </div>
+    </div>
+    <div class="content2">
+        <img th:src="@{/images/gallery/bg.jpg}" alt="Event Image">
+        <div class="text-content">
+            <h2>Event</h2>
+            <p> Varsity events serve as dynamic platforms within university life, offering students diverse opportunities for growth and engagement. From intense programming contests that challenge analytical thinking to project showcasing events that highlight innovation, students are encouraged to explore and apply their skills. Educational tours broaden horizons, picnics provide a respite from academic rigors, and football matches foster teamwork and camaraderie. Cultural programs celebrate diversity, while leadership workshops and skill-building sessions prepare students for the professional world. Varsity events, thus, contribute to a well-rounded university experience, nurturing not only academic excellence but also personal development and a sense of community among students.</p>
+            <a th:href="@{/eventShow}"><button type="button">Show Event List</button></a>
+        </div>
+    </div>
+
+</section>
+</body>
+</html>

@@ -1,0 +1,255 @@
+*{
+    margin: 0;
+    padding: 0;
+
+}
+.logo{
+
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.logo img{
+
+    width: 20%;
+    border: white;
+    border-radius: 20%;
+}
+.navbar{
+
+    display: flex;
+    background-color: rgb(146, 194, 205);
+
+
+}
+.nav-list {
+
+    display: flex;
+    align-items: center;
+    height: 60px;
+
+
+}
+.nav-list li{
+    list-style: none;
+    padding: 30px 30px;
+}
+.nav-list  li a{
+
+    text-decoration: none;
+    color: black;
+}
+.nav-list  li a:hover{
+    text-decoration: none;
+    color: grey;
+
+}
+.background{
+    background: rgba(0,0,0,0.6) url('itbuilding.jpg');
+    background-size: cover;
+    background-blend-mode:darken;
+
+}
+
+.box-main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: aliceblue;
+    height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 40px;
+
+}
+
+.big-text{
+
+    font-size: 38px;
+    text-align:center ;
+}
+.small-text{
+    font-size: 18px;
+    height: 80%;
+}
+.one{
+    height: 70%;
+}
+
+.content1, .content2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 800px;
+    margin: auto;
+    padding: 50px;
+    background-color: #f4f4f4;
+    margin-bottom: 20px; /* Add some margin between sections */
+}
+
+.member, .text-content {
+    flex: 1;
+    padding: 0 20px;
+}
+
+img {
+    max-width: 20%;
+    height: auto;
+    border-radius: 5px;
+}
+
+h2 {
+    font-size: 1.5em;
+}
+
+.content1,.content2 {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.text-centerd{
+    text-align: center;
+    padding-top: 30px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.container {
+    height: 100vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('bg3.jpg');
+    background-position: center;
+    background-size: cover;
+    position: relative;
+}
+
+.formbox {
+    width: 30%;
+    max-width: 300px; /* Increased max-width for better visibility */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 50px 60px 70px;
+    text-align: center;
+}
+
+.formbox h1 {
+    font-size: 30px;
+    margin-bottom: 60px;
+    color: rgb(11, 12, 112);
+    position: relative;
+}
+
+.formbox h1::after {
+    content: '';
+    width: 30px;
+    height: 4px;
+    border-radius: 3px;
+    background: #3c00a0;
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.input-field{
+    background: #eaeaea;
+    margin: 15px 0;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    max-height: 65px;
+    transition: max-height 0.5s;
+    overflow: hidden;
+
+}
+
+
+form p {
+    text-align: center;
+    font-size: 13px;
+    padding: 10px;
+}
+
+form p a {
+    text-decoration: none;
+    color: #3c00a0;
+}
+
+.btn-filled {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-filled button {
+    flex: 1; /* Equal width for both buttons, adjust as needed */
+    margin-right: 10px; /* Added margin for spacing between buttons */
+    background: #3c00a0;
+    height: 40px;
+    border-radius: 20px;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    transition: background 1s;
+    color: #fff; /* Added text color for better visibility */
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #9900ff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 10px;
+}
+.btn-filled button.disable{
+
+    background: #eaeaea;
+    color:#555 ;
+
+
+
+}
+
+/* Footer styles */
+footer {
+    background-color: rgb(146, 194, 205);
+    color: #13193c;
+    padding: 20px;
+    text-align: center;
+}
+
+footer h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+footer p {
+    margin: 5px 0;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    footer {
+        padding: 15px;
+    }
+
+    footer h2 {
+        font-size: 1.2rem;
+    }
+}

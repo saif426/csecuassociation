@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vision and Mission</title>
+    <link rel="stylesheet" th:href="@{/css/batchSh.css}">
+</head>
+<body>
+<nav class="navbar">
+    <div class="logo-container">
+        <img class="logo" th:src="@{/images/culogo.png}" alt="CU Logo">
+        <div class="logo-text">
+            <p>COMPUTER SCIENCE AND ENGINEERING</p>
+            <p>UNIVERSITY OF CHITTAGONG</p>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <button class="dropdown-toggle">Event</button>
+        <ul class="dropdown-menu">
+            <li><a th:href="@{/eventShow}">Upcoming Event</a></li>
+
+        </ul>
+    </div>
+
+    <div class="dropdown">
+        <button class="dropdown-toggle" onclick="redirectToLogin()">Login</button>
+    </div>
+
+
+    <div class="dropdown">
+        <button class="dropdown-toggle">About Us</button>
+        <ul class="dropdown-menu">
+            <li><a th:href="@{/vision}">Vision and Mission</a></li>
+            <li><a th:href="@{/showBatch}">Batch Representative</a></li>
+            <li><a th:href="@{/log}">Admin Panel</a></li>
+        </ul>
+    </div>
+
+</nav>
+
+
+<div class="batch-info-container">
+    <div th:each="batchEntry : ${groupedUsers}" class="batch-card">
+        <h2 class="batch-title">Batch <span th:text="${batchEntry.key}"></span></h2>
+        <table class="batch-table">
+            <thead>
+            <tr>
+                <th>Student ID</th>
+                <th>Name</th>
+                <th>Session</th>
+                <th>Email</th>
+                <th>Mobile</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${batchEntry.value}">
+                <td th:text="${user.studentId}"></td>
+                <td th:text="${user.name}"></td>
+                <td th:text="${user.session}"></td>
+                <td th:text="${user.email}"></td>
+                <td th:text="${user.mobile}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<script>
+    function redirectToLogin() {
+        window.location.href = '/login';
+    }
+</script>
+
+
+
+
+<footer>
+    <div class="footer-content">
+        <p class="developer">Developed by Fahmida</p>
+    </div>
+</footer>
+
+
+</body>
+</html>

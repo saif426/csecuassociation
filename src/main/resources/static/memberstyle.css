@@ -1,0 +1,56 @@
+/* Resetting default margin and padding */
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+/* Container styling */
+.container {
+    width: 50%;
+    margin: 0 auto;
+}
+
+/* Form styling */
+form {
+    margin-top: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: inline-block;
+    width: 120px;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 200px;
+    padding: 5px;
+}
+
+button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Heading styling */
+h2 {
+    text-align: center;
+    margin-top: 50px;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+    .container {
+        width: 80%;
+    }
+}

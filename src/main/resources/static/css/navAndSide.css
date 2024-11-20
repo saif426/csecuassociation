@@ -1,0 +1,456 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Navbar layout */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background: linear-gradient(to right, #B4B8B2, #87CEFA, #B4B8B2); /* Dark ash on both sides, light sky blue in the middle */
+    color: white;
+}
+
+/* Logo and text styling */
+.logo-container {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.logo {
+    height: 50px; /* Adjust size as needed */
+    margin-right: 15px;
+}
+
+.logo-text {
+    font-size: 16px; /* Adjust font size for readability */
+    color: white;
+}
+
+.logo-text p:last-child {
+    font-size: 14px; /* Smaller text for "UNIVERSITY OF CHITTAGONG" */
+    color: black; /* Black color for "UNIVERSITY OF CHITTAGONG" */
+}
+
+/* Dropdown styling */
+.dropdown {
+    position: relative;
+    margin-left: 1px; /* Space out the dropdowns */
+    margin-right: 10px;
+}
+
+.dropdown-toggle {
+    background-color: #444;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: #444;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    min-width: 150px;
+    z-index: 1000;
+}
+
+.dropdown-menu li {
+    width: 100%;
+}
+
+.dropdown-menu li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 10px 15px;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-menu li a:hover {
+    background-color: #555;
+}
+
+/* Show dropdown menu on hover */
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+/* Sidebar styling */
+.sidebar {
+    width: 200px;
+    height: 100vh; /* Full height */
+    background: linear-gradient(to bottom, #87CEFA, #B4B8B2); /* Gradient for a modern look */
+    position: fixed;
+    top: 0; /* Start at the top */
+    left: 0;
+    padding-top: 80px; /* Space to ensure it starts below the navbar */
+    overflow-y: auto;
+    border-right: 1px solid #ddd;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 500; /* Ensure proper stacking below navbar */
+}
+
+/* Main menu list */
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar ul li {
+    padding: 10px 20px;
+    cursor: pointer;
+    color: #333;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #f9f9f9; /* Light background for contrast */
+    border-radius: 8px; /* Rounded corners */
+    margin: 5px 10px; /* Spacing between items */
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+
+/* Hover effect for main menu */
+.sidebar ul li:hover {
+    background-color: #87CEFA; /* Highlight color on hover */
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow effect on hover */
+}
+
+/* Submenu styles */
+.sidebar ul li .submenu {
+    display: none;
+    padding-left: 20px; /* Indentation for submenus */
+}
+
+/* Show submenu on hover */
+.sidebar ul li:hover .submenu {
+    display: block;
+}
+
+/* Submenu items */
+.sidebar ul li .submenu li {
+    padding: 8px 20px; /* Match main menu padding */
+    font-size: 14px; /* Slightly smaller font size for submenus */
+    font-weight: normal; /* Normal weight for submenus */
+    color: #444; /* Slightly lighter text color for submenus */
+    background-color: #f4f4f4; /* Light background for submenus */
+    border-radius: 6px; /* Rounded corners for submenu */
+    margin: 3px 0; /* Space between submenu items */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Hover effect for submenu items */
+.sidebar ul li .submenu li:hover {
+    background-color: #87CEFA; /* Highlight color on hover */
+    color: white;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2); /* Subtle shadow effect */
+}
+
+/* Remove underline and match font styles */
+.sidebar ul li .submenu li a {
+    text-decoration: none;
+    color: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    display: block;
+    padding: 0;
+}
+
+/* Icons support for main menu */
+.sidebar ul li::before {
+    content: "▶"; /* Example icon (arrow) */
+    display: inline-block;
+    margin-right: 10px; /* Space for the icon */
+    color: #444; /* Icon color */
+    transition: transform 0.3s ease;
+}
+
+/* Rotate icon on hover */
+.sidebar ul li:hover::before {
+    transform: rotate(90deg); /* Rotate arrow on hover */
+    color: white; /* Match hover text color */
+}
+
+
+
+/* Ensure navbar overlaps sidebar */
+.navbar {
+    z-index: 1000;
+    position: relative;
+}
+/* Flex container for horizontal scrolling */
+.flex-container {
+    display: flex;
+    flex-wrap: nowrap; /* Prevent wrapping, enable horizontal scrolling */
+    overflow-x: auto; /* Enable horizontal scrolling */
+    gap: 10px; /* Space between sections */
+    padding: 10px; /* Padding around the container */
+    margin-left: 210px; /* Add margin to offset the sidebar's width (200px + 10px for spacing) */
+    scrollbar-width: thin; /* Slim scrollbar for Firefox */
+    scrollbar-color: #87ceeb #d3d3d3; /* Custom scrollbar colors */
+}
+
+/* Section for events */
+.event-section {
+    flex: 0 0 auto; /* Prevent sections from shrinking, allow scrolling */
+    width: 300px; /* Fixed width for sections */
+    text-align: center;
+    display: flex;
+    padding: 20px; /* Padding inside each section */
+    background: linear-gradient(145deg, #d3d3d3, #87ceeb); /* Gray to sky blue gradient */
+    margin: 10px; /* Space between sections */
+    flex-direction: column; /* Vertical content inside each section */
+    border-radius: 10px; /* Smooth rounded corners */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.1); /* Soft shadows */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animation for hover effect */
+}
+.event-section-u {
+    flex: 0 0 auto; /* Prevent sections from shrinking, allow scrolling */
+    width: 200px; /* Fixed width for sections */
+    text-align: center;
+    display: flex;
+    padding: 20px; /* Padding inside each section */
+    background: linear-gradient(145deg, #d3d3d3, #87ceeb); /* Gray to sky blue gradient */
+    margin: 10px; /* Space between sections */
+    flex-direction: column; /* Vertical content inside each section */
+    border-radius: 10px; /* Smooth rounded corners */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.1); /* Soft shadows */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animation for hover effect */
+}
+
+
+/* Hover effect for sections */
+.event-section:hover {
+    transform: translateY(-5px); /* Slight upward lift */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
+}
+
+/* Title Styling */
+.section-title {
+    font-size: 1.5em; /* Prominent title font size */
+    font-weight: bold;
+    margin-bottom: 15px; /* Space below the title */
+    color: #333; /* Darker text for contrast */
+    text-transform: uppercase; /* Uppercase for emphasis */
+    letter-spacing: 1.5px; /* Spacing between letters */
+    text-align: center;
+}
+
+/* Description Styling */
+.section-description {
+    font-size: 4em; /* Regular font size */
+    color: #555; /* Neutral text color */
+    line-height: 1.6; /* Increased line height for readability */
+    padding: 0 10px; /* Padding around the text */
+}
+
+/* Scrollbar customization for webkit browsers */
+.flex-container::-webkit-scrollbar {
+    height: 8px; /* Height of horizontal scrollbar */
+}
+
+.flex-container::-webkit-scrollbar-thumb {
+    background: #87ceeb; /* Sky blue scrollbar thumb */
+    border-radius: 10px; /* Rounded scrollbar thumb */
+}
+
+.flex-container::-webkit-scrollbar-track {
+    background: #d3d3d3; /* Gray scrollbar track */
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .flex-container {
+        margin-left: 0; /* Remove margin for smaller screens */
+    }
+
+    .event-section {
+        width: 250px; /* Smaller section width on mobile */
+    }
+}
+
+/* Events container styling */
+.events-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px; /* Adds generous spacing between event cards */
+    padding: 30px;
+    background: linear-gradient(135deg, #eef2f3, #ffffff);
+    text-align: center;
+}
+h1 {
+    font-size: 2em; /* Adjust the font size */
+    font-weight: bold;
+    margin-bottom: 20px; /* Add some spacing below the title */
+    color: #333; /* Set a dark color for contrast */
+    text-align: center;
+}
+
+/* Individual event item */
+.item-container {
+    background: linear-gradient(145deg, #ffffff, #dfe9f3);
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    width: 340px;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.item-container:hover {
+    transform: translateY(-15px); /* Lifts the card more prominently */
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(145deg, #d8e2eb, #ffffff);
+}
+
+/* Event information container */
+.event-info {
+    padding: 25px;
+    text-align: center;
+    background: linear-gradient(135deg, #ffffff, #f3f8fc);
+    border-radius: 15px 15px 0 0;
+}
+
+/* Title styling */
+.title {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: #18537a;
+    margin-bottom: 15px;
+}
+
+/* Separator line */
+.separator {
+    width: 50px;
+    height: 5px;
+    background: linear-gradient(90deg, #18537a, #4fb0d8);
+    margin: 10px auto 20px;
+    border-radius: 5px;
+}
+
+/* Info text */
+.info {
+    font-size: 1em;
+    color: #4f4f4f;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.info i {
+    color: #18537a;
+    font-size: 1.3em;
+}
+
+.info span {
+    font-weight: bold;
+    color: #18537a;
+}
+
+/* Additional info styling */
+.additional-info {
+    margin-top: 15px;
+    padding: 20px 15px;
+    border-top: 1px solid #eee;
+    background: #f7f9fc;
+    border-radius: 0 0 15px 15px;
+    text-align: left;
+    position: relative;
+}
+
+/* Fee styling */
+.info:nth-child(2) {
+    font-size: 1.2em;
+    color: #2b6777;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Registration date styles */
+.additional-info p {
+    font-size: 1em;
+    color: #555;
+    margin: 8px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.additional-info p span {
+    text-align: center;
+    font-weight: bold;
+    color: #18537a;
+    background: linear-gradient(90deg, #cfeaff, #e8f5ff);
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.additional-info p span:hover {
+    background: linear-gradient(90deg, #18537a, #4fb0d8);
+    color: #fff;
+}
+
+/* Hover ribbon effect for cards */
+.item-container::before {
+    content: "Featured";
+    position: absolute;
+    top: 15px;
+    left: -15px;
+    background: linear-gradient(90deg, #18537a, #4fb0d8);
+    color: #fff;
+    padding: 5px 20px;
+    font-size: 0.9em;
+    font-weight: bold;
+    transform: rotate(-45deg);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+    display: none;
+}
+
+.item-container:hover::before {
+    display: block; /* Show ribbon on hover */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .events-container {
+        gap: 20px;
+        padding: 15px;
+    }
+
+    .item-container {
+        width: 100%;
+    }
+
+    .title {
+        font-size: 1.5em;
+    }
+
+    .info {
+        font-size: 0.9em;
+    }
+
+    .additional-info p {
+        font-size: 0.85em;
+    }
+}

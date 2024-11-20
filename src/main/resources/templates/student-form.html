@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+
+    <title>Event Details</title>
+    <style>
+        /* Resetting default margin and padding */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Font family */
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Navigation styling */
+        .logo {
+            width: 20%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 20%;
+            border-radius: 20%;
+        }
+
+        .navbar {
+            display: flex;
+            background-color: rgb(146, 194, 205);
+        }
+
+        .nav-list {
+            display: flex;
+            align-items: center;
+            height: 60px;
+        }
+
+        .nav-list li {
+            list-style: none;
+            padding: 30px 30px;
+        }
+
+        .nav-list li a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .nav-list li a:hover {
+            text-decoration: none;
+            color: grey;
+        }
+
+        /* Centering container */
+        .container {
+            min-height: 100vh;
+            width: 100%;
+            font-size: 16px;
+            background: #eee;
+            color: #777;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Item container */
+        .item-container {
+            position: relative;
+            margin: 24px;
+            width: 320px;
+            height: auto;
+            overflow: hidden;
+            background-color: #fff;
+            box-shadow: 0 0 30px 5px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+        }
+
+
+
+        .body-container {
+            position: relative;
+        }
+
+        .overlay {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            background-color: rgba(24, 83, 122, 0.6);
+            opacity: 0;
+            transition: height linear 0.4s, opacity linear 0.2s;
+        }
+
+        .item-container:hover .overlay {
+            opacity: 1;
+            height: 150px;
+        }
+
+        /* Event info */
+        .event-info {
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 8px;
+        }
+
+        .title,
+        .price {
+            color: #18537a;
+            font-size: 1.5em;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin: 12px;
+        }
+
+        .info {
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+            text-align: center;
+        }
+
+        .separator {
+            width: 20%;
+            height: 6px;
+            background-color: #17537a;
+            margin-bottom: 16px;
+        }
+
+        .additional-info {
+            border-top: 1px solid #bbb;
+            margin-top: 12px;
+            padding: 28px;
+            padding-bottom: 0;
+            height: auto;
+        }
+
+        .additional-info .info {
+            font-size: 0.9em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .info i {
+            color: #18537a;
+            font-size: 1.1em;
+            margin-right: 4px;
+        }
+
+        .info span {
+            color: #18537a;
+            font-weight: bolder;
+        }
+
+        /* Action button */
+        .action {
+            color: #fff;
+            border: 3px solid #fff;
+            background-color: transparent;
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            outline: none;
+            cursor: pointer;
+            padding: 12px;
+            text-transform: uppercase;
+            font-size: 1.3em;
+            font-weight: bold;
+            letter-spacing: 2px;
+            transition: background-color 0.4s, top 0.4s;
+        }
+
+        .item-container:hover .action {
+            top: 50px;
+        }
+
+        .action:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Registration form */
+        #registrationForm {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            z-index: 9999;
+        }
+
+        #registrationForm h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #registrationForm form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #registrationForm label,
+        #registrationForm input {
+            margin-bottom: 10px;
+        }
+
+        #registrationForm input[type="submit"] {
+            padding: 10px 20px;
+            background: #18537a;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        #registrationForm input[type="submit"]:hover {
+            background: #123e54;
+        }
+    </style>
+
+</head>
+<body>
+<nav class="navbar">
+    <ul class="nav-list">
+        <div class="logo"><img th:src="@{/images/culogo.png}"></div>
+
+        <li><a th:href="@{/index}">Home</a></li>
+
+        <li><a th:href="@{/contact}">Contact</a></li>
+        <li><a th:href="@{/showLoginForm}">Log in</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+    <div th:each="event : ${events}" class="item-container">
+        <div class="body-container">
+            <div class="overlay"></div>
+
+            <div class="event-info">
+                <p class="title" th:text="${event.name}">Event Name</p>
+                <div class="separator"></div>
+                <p class="info" th:text="${event.venue}">Venue</p>
+                <p class="price" th:text="${event.fee}">Fee</p>
+
+                <div class="additional-info">
+                    <p class="info">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span th:text="${event.venue}">Venue</span>
+                    </p>
+                    <p class="info">
+                        <i class="far fa-calendar-alt"></i>
+                        <span th:text="${event.eventDate}">Date</span>
+                    </p>
+
+                    <p>Registration Start: <span th:text="${#dates.format(event.registrationStart, 'dd/MM/yyyy HH:mm')}"></span></p>
+                    <p>Registration End: <span th:text="${#dates.format(event.registrationEnd, 'dd/MM/yyyy HH:mm')}"></span></p>
+                </div>
+            </div>
+            <button class="action" th:attr="data-event-name=${event.id}">Book it</button>
+        </div>
+    </div>
+</div>
+
+<!-- Registration Form -->
+<div id="registrationForm">
+    <h2>Registration Form</h2>
+    <form th:action="@{/register}" th:object="${register}" method="post">
+
+        <label for="studentId">Student ID:</label>
+        <input type="text" id="studentId" name="studentId" required>
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br>
+
+        <label for="eventId">Event ID:</label>
+        <input type="text" id="eventId" name="eventId" readonly><br>
+
+
+        <button type="submit">Submit</button>
+        <button type="button" onclick="closeRegistrationForm()">Cancel</button>
+    </form>
+</div>
+
+<script>
+    document.querySelectorAll('.action').forEach(function(button) {
+        button.addEventListener('click', function() {
+            var eventName = this.getAttribute('data-event-name');
+            showRegistrationForm(eventName);
+        });
+    });
+
+
+    function showRegistrationForm(eventId) {
+        // Display the registration form
+        document.getElementById("registrationForm").style.display = "block";
+        // Set the event name in the form
+        document.getElementById("eventId").value = eventId;
+    }
+
+    function closeRegistrationForm() {
+        // Hide the registration form
+        document.getElementById("registrationForm").style.display = "none";
+    }
+</script>
+
+</body>
+</html>

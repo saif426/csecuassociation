@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Expense Summary</title>
+    <!-- Include Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div style="width: 400px; height: 300px;">
+    <canvas id="expenseChart" width="400" height="300"></canvas>
+</div>
+
+<script th:inline="javascript">
+    /* Extracting data from Thymeleaf model and formatting it for Chart.js */
+    var years = /*[[${expenseSummaryByYear.![year]}]]*/ [];
+    var amounts = /*[[${expenseSummaryByYear.![totalAmount]}]]*/ [];
+
+    /* Creating data for the chart */
+    var chartData = {
+        labels: years,
+        datasets: [{
+            label: 'Total Amount',
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1,
+            data: amounts
+        }]
+    };
+
+    /* Rendering the chart */
+    var ctx = document.getElementById('expenseChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: chartData,
+        options: {
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>

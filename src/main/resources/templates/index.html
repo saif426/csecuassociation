@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<style>
+  footer {
+    text-align: center;
+    background-color: #3fb4db; /* Change the background color here */
+  }
+</style>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+  <link rel="stylesheet" th:href="@{/css/gallery.css}">
+
+  <title>CSE CU ASSOCIATION</title>
+
+
+
+
+</head>
+<body>
+<nav class="navbar">
+  <div class="logo-container">
+    <img class="logo" th:src="@{/images/culogo.png}" alt="CU Logo">
+    <div class="logo-text">
+      <p>COMPUTER SCIENCE AND ENGINEERING</p>
+      <p>UNIVERSITY OF CHITTAGONG</p>
+    </div>
+  </div>
+
+  <div class="dropdown">
+    <button class="dropdown-toggle">Event</button>
+    <ul class="dropdown-menu">
+      <li><a th:href="@{/eventShow}">Upcoming Event</a></li>
+
+    </ul>
+  </div>
+
+  <div class="dropdown">
+    <button class="dropdown-toggle" onclick="redirectToLogin()">Login</button>
+  </div>
+
+
+
+  <div class="dropdown">
+    <button class="dropdown-toggle">About Us</button>
+    <ul class="dropdown-menu">
+      <li><a th:href="@{/showVision}">Vision and Mission</a></li>
+      <li><a th:href="@{/showBatch}">Batch Representative</a></li>
+      <li><a th:href="@{/log}">Admin Panel</a></li>
+    </ul>
+  </div>
+
+</nav>
+
+<section class="background first">
+  <div class="box-main">
+    <div class="one">
+      <p class="big-text">WELCOME TO </p>
+      <p class="big-text">CSE CU ASSOCIATION</p>
+      </div>
+  </div>
+</section>
+
+<section id="gallery_section" style="display: block;background-color: rgba(200, 211, 211, 0.8);">
+  <div id="gallery-content">
+
+
+        <p class="big-text-g">Image Gallery</p>
+
+    <!-- Gallery Images -->
+    <div id="gallery-images">
+      <div class="image-container" id="image-container">
+        <!-- Images will be dynamically added here -->
+      </div>
+    </div>
+  </div>
+  <script th:src="@{/js/gallery.js}"></script>
+</section>
+
+
+
+<script>
+  function redirectToLogin() {
+    window.location.href = '/login';
+  }
+</script>
+
+
+
+<footer>
+  <div class="footer-content">
+    <p class="developer">Developed by Fahmida</p>
+  </div>
+</footer>
+
+
+</body>
+</html>

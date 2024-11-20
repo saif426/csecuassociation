@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+</head>
+<body>
+<div class="background">
+    <div class="login-container">
+        <h1>CSE CU ASSOCIATION</h1>
+        <form th:action="@{/login}" method="post" id="loginForm">
+            <div class="input-group">
+                <label for="userId">User ID:</label>
+                <input type="text" id="userId" name="userId" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <!-- CAPTCHA Section -->
+            <div id="captcha" class="form_div">
+                <div class="captcha_row">
+                    <div class="preview">
+                        <canvas id="captchaCanvas" width="200" height="45"></canvas>
+                    </div>
+                    <button type="button" class="captcha_refresh"><i class="fas fa-sync"></i> Refresh</button>
+                </div>
+                <div class="input-group">
+                    <label for="captcha_form">Enter CAPTCHA:</label>
+                    <input type="text" id="captcha_form" name="captcha_form" class="input form-control form_input_captcha" placeholder="Enter captcha" required>
+                    <span id="captchaError" style="color: red; display: none;">Incorrect CAPTCHA. Please try again.</span>
+                </div>
+            </div>
+
+            <!-- Hidden Input to Store CAPTCHA Answer -->
+            <input type="hidden" id="captcha_answer" name="captcha_answer">
+
+            <button type="submit">Login</button>
+
+            <!-- Forgot Password and Register Links -->
+            <div class="form-footer">
+                <a href="/forgot-password" class="forgot-password">Forgot Password?</a>
+                <a th:href="@{/memberSignForm}" class="register-link">Sign Up</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Function to generate a new CAPTCHA
+    function generateCaptcha() {
+        const canvas = document.getElementById("captchaCanvas");
+        const ctx = canvas.getContext("2d");
+
+        // Clear the canvas before drawing a new CAPTCHA
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let captchaText = '';
+
+        // Generate random 6 characters CAPTCHA text
+        for (let i = 0; i < 6; i++) {
+            captchaText += characters.charAt(Math.floor(Math.random() * characters.length));
+        }
+
+        // Set background and text styles
+        ctx.fillStyle = "rgba(0, 0, 0, 0.1)"; // Background color
+        ctx.fillRect(0, 0, canvas.width, canvas.height); // Fill the canvas
+
+        ctx.font = "30px Arial";
+        ctx.fillStyle = "black"; // Text color
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+
+        // Draw the CAPTCHA text
+        ctx.fillText(captchaText, canvas.width / 2, canvas.height / 2);
+
+        // Set the CAPTCHA text value to the hidden input field for validation
+        document.getElementById("captcha_answer").value = captchaText;
+    }
+
+    // Refresh the CAPTCHA on button click
+    document.querySelector(".captcha_refresh").addEventListener("click", function() {
+        generateCaptcha();
+        document.getElementById("captcha_form").value = ''; // Clear entered CAPTCHA on refresh
+        document.getElementById("captchaError").style.display = 'none'; // Hide error message
+    });
+
+    // Form validation before submission
+    document.getElementById("loginForm").addEventListener("submit", function(event) {
+        const enteredCaptcha = document.getElementById("captcha_form").value;
+        const correctCaptcha = document.getElementById("captcha_answer").value;
+
+        if (enteredCaptcha !== correctCaptcha) {
+            event.preventDefault(); // Prevent form submission
+            document.getElementById("captchaError").style.display = 'block'; // Show error message
+            return false;
+        }
+        return true; // Allow form submission if CAPTCHA is correct
+    });
+
+    // Generate CAPTCHA on page load
+    window.onload = generateCaptcha;
+</script>
+</body>
+</html>

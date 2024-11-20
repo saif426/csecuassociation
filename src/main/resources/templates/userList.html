@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Member Sign Up Form</title>
+    <style>
+        /* Resetting default margin and padding */
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navigation styling */
+        .logo{
+
+            width: 20%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .logo img{
+
+            width: 20%;
+            border: white;
+            border-radius: 20%;
+        }
+        .navbar{
+
+            display: flex;
+            background-color: rgb(146, 194, 205);
+
+
+        }
+        .nav-list {
+
+            display: flex;
+            align-items: center;
+            height: 60px;
+
+
+        }
+        .nav-list li{
+            list-style: none;
+            padding: 30px 30px;
+        }
+        .nav-list  li a{
+
+            text-decoration: none;
+            color: black;
+        }
+        .nav-list  li a:hover{
+            text-decoration: none;
+            color: grey;
+
+        }
+
+        /* Centering container */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center; /* Center vertically as well */
+            height: 80vh; /* Make container full height of viewport */
+        }
+        .content {
+            text-align: center; /* Center content horizontally */
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even){background-color: #f2f2f2}
+
+        th {
+            background-color: #04AA6D;
+            color: white;}
+    </style>
+</head>
+<body>
+<nav class="navbar">
+    <ul class="nav-list">
+        <div class="logo"><img th:src="@{/images/culogo.png}"></div>
+
+        <li><a th:href="@{/login}">Home</a></li>
+        <li><a th:href="@{/contact}">Contact</a></li>
+        <li><a th:href="@{/showLoginForm}">Log in</a></li>
+    </ul>
+</nav>
+<div class="container">
+    <div class="content">
+        <h2>CSECU Association Members Information</h2><br><br>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Department</th>
+        <th>Phone</th>
+        <th>Email</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.department}"></td>
+        <td th:text="${user.phone}"></td>
+        <td th:text="${user.email}"></td>
+    </tr>
+    </tbody>
+</table>
+    </div>
+</div>
+</body>
+</html>

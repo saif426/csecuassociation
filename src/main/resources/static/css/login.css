@@ -1,0 +1,145 @@
+/* Background style */
+.background {
+    position: relative;
+    background: url('../images/itbuilding.jpg') no-repeat center center fixed;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Dark overlay to darken the background image */
+.background::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* Dark overlay with 40% opacity */
+    z-index: 1;
+}
+
+/* Login container */
+.login-container {
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    z-index: 2;
+}
+
+/* Title */
+h1 {
+    font-family: 'Arial', sans-serif;
+    color: #0d3e6f;
+    font-size: 30px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* Input fields */
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+/* CAPTCHA Section */
+.form_div {
+    margin-top: 20px;
+}
+
+.captcha_row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.preview {
+    width: 200px;
+    height: 45px;
+    margin-right: 10px;
+}
+
+.captcha_refresh {
+    padding: 5px 10px;
+    background-color: #0d3e6f;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.captcha_refresh:hover {
+    background-color: #004c6d;
+}
+
+.input.form_input_captcha {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+/* Button style */
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #0d3e6f;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #004c6d;
+}
+
+/* Forgot Password and Register links */
+.form-footer {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.forgot-password,
+.register-link {
+    color: #0d3e6f;
+    font-size: 14px;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.forgot-password:hover,
+.register-link:hover {
+    color: #004c6d;
+}
+
+.register-link {
+    font-weight: bold;
+}
