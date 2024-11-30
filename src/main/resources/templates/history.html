@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our History</title>
+    <link rel="stylesheet" th:href="@{/css/history.css}">
+</head>
+<body>
+<nav class="navbar">
+    <div class="logo-container">
+        <img class="logo" th:src="@{/images/culogo.png}" alt="CU Logo">
+        <div class="logo-text">
+            <p>COMPUTER SCIENCE AND ENGINEERING</p>
+            <p>UNIVERSITY OF CHITTAGONG</p>
+        </div>
+    </div>
+
+
+    <div class="dropdown">
+        <button class="dropdown-toggle">About Us</button>
+        <ul class="dropdown-menu">
+            <li><a th:href="@{/showVision}">Vision and Mission</a></li>
+            <li><a th:href="@{/showHistory}">Our History</a></li>
+            <li><a th:href="@{/showBatch}">Batch Representative</a></li>
+
+        </ul>
+    </div>
+
+</nav>
+
+
+
+
+    <section class="event-section">
+        <div class="section-container">
+            <h1 class="section-title">History</h1> <br>
+            <p class="section-description">The "CSE CU Association" is a departmental association that includes all students and faculty members of the Computer Science and Engineering (CSE) Department at the University of Chittagong. This association began its journey in 2010 under the name "CSE CU Association." A preparatory committee was formed on January 5, 2010, to officially establish the association. The structure and constitution of the association were approved by the 9th Academic Committee meeting of the department on May 5, 2010. On that date, the name of the association was officially changed from "CSE CU Association" to "CSE CU Association."</p>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+<footer>
+    <div class="footer-content">
+        <p class="developer">Developed by Fahmida</p>
+    </div>
+</footer>
+
+
+</body>
+</html>

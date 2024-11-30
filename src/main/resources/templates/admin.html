@@ -23,8 +23,9 @@
         <button class="dropdown-toggle">About Us</button>
         <ul class="dropdown-menu">
             <li><a th:href="@{/showVision}">Vision and Mission</a></li>
-            <li><a th:href="@{/log}">Batch Representative</a></li>
-            <li><a th:href="@{/log}">Admin Panel</a></li>
+            <li><a th:href="@{/showHistory}">Our History</a></li>
+            <li><a th:href="@{/showBatch}">Batch Representative</a></li>
+
         </ul>
     </div>
 
@@ -36,8 +37,8 @@
             Events
             <ul class="submenu">
                 <li><a th:href="@{/eventList}">Event List</a></li>
-                <li><a th:href="@{/createEvent}">Create Event</a></li>
-                <li><a th:href="@{/upcomingEvent}">Upcoming Event</a></li>
+                <li><a th:href="@{/eventForm}">Create Event</a></li>
+
             </ul>
         </li>
     </ul>
@@ -46,8 +47,8 @@
         <li>
             Expense
             <ul class="submenu">
-                <li><a th:href="@{/}">Expense info</a></li>
-                <li><a th:href="@{/createEvent}">Create new Expense</a></li>
+                <li><a th:href="@{/expenseShow}">Expense info</a></li>
+                <li><a th:href="@{/expenseForm}">Create new Expense</a></li>
 
             </ul>
         </li>
@@ -58,8 +59,7 @@
             Member
             <ul class="submenu">
                 <li><a th:href="@{/}">Current Student</a></li>
-                <li><a th:href="@{/createEvent}">Alumni</a></li>
-                <li><a th:href="@{/createEvent}">Teacher</a></li>
+                <li><a th:href="@{/}">Teacher</a></li>
 
             </ul>
         </li>
@@ -79,7 +79,7 @@
 
     <section class="event-section">
         <div class="section-container-m">
-            <h1 class="section-title">Total Events Completed</h1>
+            <h1 class="section-title">Total Events</h1>
             <br>
             <p class="section-description">
                 <strong th:text="${totalEvents}">0</strong>

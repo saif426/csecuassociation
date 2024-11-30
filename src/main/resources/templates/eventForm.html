@@ -2,115 +2,73 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Member Sign Up Form</title>
-    <style>
-        /* Resetting default margin and padding */
-        * {
-            margin: 0;
-            padding: 0;
-        }
+    <title>Event Form</title>
+    <link rel="stylesheet" th:href="@{/css/navAndSide.css}">
+    <link rel="stylesheet" th:href="@{/css/eventForm.css}">
 
-        /* Navigation styling */
-        .logo{
-
-            width: 20%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .logo img{
-
-            width: 20%;
-            border: white;
-            border-radius: 20%;
-        }
-        .navbar{
-
-            display: flex;
-            background-color: rgb(146, 194, 205);
-
-
-        }
-        .nav-list {
-
-            display: flex;
-            align-items: center;
-            height: 60px;
-
-
-        }
-        .nav-list li{
-            list-style: none;
-            padding: 30px 30px;
-        }
-        .nav-list  li a{
-
-            text-decoration: none;
-            color: black;
-        }
-        .nav-list  li a:hover{
-            text-decoration: none;
-            color: grey;
-
-        }
-
-        /* Centering container */
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        /* Form styling */
-        form {
-            width: 300px;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #f9f9f9;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        label {
-            display: inline-block;
-            width: 100px;
-        }
-
-        input[type="text"],
-        input[type="password"] {
-            width: calc(100% - 100px);
-            padding: 5px;
-        }
-
-        button[type="submit"] {
-            width: 100%;
-            padding: 10px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-        }
-
-        button[type="submit"]:hover {
-            background-color: #0056b3;
-        }
-    </style>
 </head>
 <body>
 <nav class="navbar">
-    <ul class="nav-list">
-        <div class="logo"><img th:src="@{/images/culogo.png}"></div>
+    <div class="logo-container">
+        <img class="logo" th:src="@{/images/culogo.png}" alt="CU Logo">
+        <div class="logo-text">
+            <p>COMPUTER SCIENCE AND ENGINEERING</p>
+            <p>UNIVERSITY OF CHITTAGONG</p>
+        </div>
+    </div>
 
-        <li><a th:href="@{/login}">Home</a></li>
 
-        <li><a th:href="@{/contact}">Contact</a></li>
-        <li><a th:href="@{/showLoginForm}">Log in</a></li>
-    </ul>
+
+
+
+    <div class="dropdown">
+        <button class="dropdown-toggle">About Us</button>
+        <ul class="dropdown-menu">
+            <li><a th:href="@{/showVision}">Vision and Mission</a></li>
+            <li><a th:href="@{/showHistory}">Our History</a></li>
+            <li><a th:href="@{/showBatch}">Batch Representative</a></li>
+
+        </ul>
+    </div>
+
 </nav>
+
+
+<div class="sidebar">
+    <ul>
+        <li>
+            Events
+            <ul class="submenu">
+                <li><a th:href="@{/eventShow}">Event List</a></li>
+                <li><a th:href="@{/eventForm}">Create Event</a></li>
+
+            </ul>
+        </li>
+    </ul>
+
+    <ul>
+        <li>
+            Expense
+            <ul class="submenu">
+                <li><a th:href="@{/}">Expense info</a></li>
+                <li><a th:href="@{/createEvent}">Create new Expense</a></li>
+
+            </ul>
+        </li>
+    </ul>
+
+    <ul>
+        <li>
+            Member
+            <ul class="submenu">
+                <li><a th:href="@{/}">Current Student</a></li>
+                <li><a th:href="@{/}">Teacher</a></li>
+
+            </ul>
+        </li>
+    </ul>
+</div>
+
 
 <div class="container">
     <form th:action="@{/eventSave}" th:object="${event}" method="post">
@@ -129,21 +87,34 @@
         </div>
         <div class="form-group">
             <label for="eventDate">Event Date:</label>
-            <!-- <input type="date" id="eventDate" name="eventDate" required> -->
-            <input type="text" id="eventDate" name="eventDate" placeholder="mm/dd/yyyy" required><br><br>
+            <input type="datetime-local" id="eventDate" name="eventDate" required>
         </div>
         <div class="form-group">
             <label for="registrationStart">Registration Start:</label>
-            <!-- <input type="datetime-local" id="registrationStart" name="registrationStart"> -->
-            <input type="text" id="registrationStart" name="registrationStart" placeholder="mm/dd/yyyy --:-- --" required><br><br>
+            <input type="datetime-local" id="registrationStart" name="registrationStart" required>
         </div>
         <div class="form-group">
             <label for="registrationEnd">Registration End:</label>
-            <!--  <input type="datetime-local" id="registrationEnd" name="registrationEnd">-->
-              <input type="text" id="registrationEnd" name="registrationEnd" placeholder="mm/dd/yyyy --:-- --" required><br><br>
-          </div>
-          <button type="submit">Submit</button>
-      </form>
-  </div>
+            <input type="datetime-local" id="registrationEnd" name="registrationEnd" required>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+flatpickr("#eventDate", {
+    dateFormat: "Y-m-d H:i" // MySQL date format
+});
+flatpickr("#registrationStart", {
+enableTime: true,
+dateFormat: "Y-m-d H:i" // MySQL datetime format
+});
+flatpickr("#registrationEnd", {
+enableTime: true,
+dateFormat: "Y-m-d H:i" // MySQL datetime format
+});
+});
+</script>
+
   </body>
   </html>

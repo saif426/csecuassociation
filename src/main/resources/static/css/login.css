@@ -3,7 +3,7 @@
     position: relative;
     background: url('../images/itbuilding.jpg') no-repeat center center fixed;
     background-size: cover;
-    height: 100vh;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -45,7 +45,7 @@ h1 {
 
 /* Input fields */
 .input-group {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     text-align: left;
 }
 

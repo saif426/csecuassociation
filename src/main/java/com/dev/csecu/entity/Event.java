@@ -19,12 +19,15 @@ public class Event {
     @Column(name = "name", nullable = false, length = 255)
     private String name;
 
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "event_date", nullable = false)
     private Date eventDate;
 
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "registration_start", nullable = false)
     private Date registrationStart;
 
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "registration_end", nullable = false)
     private Date registrationEnd;
 
