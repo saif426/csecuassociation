@@ -192,110 +192,7 @@
     z-index: 1000;
     position: relative;
 }
-/* Flex container for horizontal scrolling */
-.flex-container {
-    display: flex;
-    flex-wrap: nowrap; /* Prevent wrapping, enable horizontal scrolling */
-    overflow-x: auto; /* Enable horizontal scrolling */
-    gap: 10px; /* Space between sections */
-    padding: 10px; /* Padding around the container */
-    margin-left: 210px; /* Add margin to offset the sidebar's width (200px + 10px for spacing) */
-    scrollbar-width: thin; /* Slim scrollbar for Firefox */
-    scrollbar-color: #87ceeb #d3d3d3; /* Custom scrollbar colors */
-}
 
-/* Section for events */
-.event-section {
-    flex: 0 0 auto; /* Prevent sections from shrinking, allow scrolling */
-    width: 300px; /* Fixed width for sections */
-    text-align: center;
-    display: flex;
-    padding: 20px; /* Padding inside each section */
-    background: linear-gradient(145deg, #d3d3d3, #87ceeb); /* Gray to sky blue gradient */
-    margin: 10px; /* Space between sections */
-    flex-direction: column; /* Vertical content inside each section */
-    border-radius: 10px; /* Smooth rounded corners */
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.1); /* Soft shadows */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animation for hover effect */
-}
-.event-section-u {
-    flex: 0 0 auto; /* Prevent sections from shrinking, allow scrolling */
-    width: 200px; /* Fixed width for sections */
-    text-align: center;
-    display: flex;
-    padding: 20px; /* Padding inside each section */
-    background: linear-gradient(145deg, #d3d3d3, #87ceeb); /* Gray to sky blue gradient */
-    margin: 10px; /* Space between sections */
-    flex-direction: column; /* Vertical content inside each section */
-    border-radius: 10px; /* Smooth rounded corners */
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.1); /* Soft shadows */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animation for hover effect */
-}
-
-.event-section-user {
-    flex: 0 0 auto; /* Prevent sections from shrinking, allow scrolling */
-    width: 400px; /* Fixed width for sections */
-    text-align: center;
-    display: flex;
-    padding: 20px; /* Padding inside each section */
-    background: linear-gradient(145deg, #d3d3d3, #87ceeb); /* Gray to sky blue gradient */
-    margin: 10px; /* Space between sections */
-    flex-direction: column; /* Vertical content inside each section */
-    border-radius: 10px; /* Smooth rounded corners */
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.1); /* Soft shadows */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animation for hover effect */
-}
-
-
-/* Hover effect for sections */
-.event-section:hover {
-    transform: translateY(-5px); /* Slight upward lift */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
-}
-
-/* Title Styling */
-.section-title {
-    font-size: 1.5em; /* Prominent title font size */
-    font-weight: bold;
-    margin-bottom: 15px; /* Space below the title */
-    color: #333; /* Darker text for contrast */
-    text-transform: uppercase; /* Uppercase for emphasis */
-    letter-spacing: 1.5px; /* Spacing between letters */
-    text-align: center;
-}
-
-/* Description Styling */
-.section-description {
-    font-size: 4em; /* Regular font size */
-    color: #555; /* Neutral text color */
-    line-height: 1.6; /* Increased line height for readability */
-    padding: 0 10px; /* Padding around the text */
-}
-
-/* Scrollbar customization for webkit browsers */
-.flex-container::-webkit-scrollbar {
-    height: 8px; /* Height of horizontal scrollbar */
-}
-
-.flex-container::-webkit-scrollbar-thumb {
-    background: #87ceeb; /* Sky blue scrollbar thumb */
-    border-radius: 10px; /* Rounded scrollbar thumb */
-}
-
-.flex-container::-webkit-scrollbar-track {
-    background: #d3d3d3; /* Gray scrollbar track */
-}
-
-/* Responsiveness */
-@media (max-width: 768px) {
-    .flex-container {
-        margin-left: 0; /* Remove margin for smaller screens */
-    }
-
-    .event-section {
-        width: 250px; /* Smaller section width on mobile */
-    }
-}
 
 /* Events container styling */
 .events-container {
@@ -469,105 +366,6 @@ h1 {
     }
 }
 
-/* Flex container for the charts */
-/* Ensuring box-sizing includes padding and border */
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-}
-
-/* Flex container for the charts */
-.charts-container {
-    display: flex;
-    justify-content: space-between; /* Distribute the space evenly between charts */
-    align-items: flex-start; /* Align charts to the top */
-    gap: 5px; /* Reduced gap between the charts */
-    width: 100%;
-    max-width: calc(100% - 220px); /* Ensure the charts fit within the available space minus sidebar width */
-    margin-top: 20px;
-}
-
-/* Ensure the chart containers don't overlap with the sidebar */
-.main-content-c {
-    display: flex;
-    justify-content: flex-start;
-    width: 100%;
-    margin-left: 220px; /* Offset content to the right, considering the sidebar width */
-    padding-top: 20px; /* Add padding to prevent overlap with navbar */
-    padding-right: 20px;
-}
-
-/* Individual chart container settings */
-.chart-container {
-    width: 48%; /* Each chart will take 48% of the available space */
-    height: 300px;
-}
-/* Styling for chart titles */
-.chart-title {
-    font-size: 24px; /* Larger font size for the title */
-    font-weight: bold; /* Make the title bold */
-    color: #333; /* Dark color for the title text */
-    text-align: center; /* Center the title */
-    margin-bottom: 10px; /* Add some space below the title */
-    font-family: 'Arial', sans-serif; /* Choose a clean, modern font */
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2); /* Soft shadow for a more attractive look */
-}
-
-
-/* Batch Information Section */
-.batch-info-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding : 80px;
-    gap: 20px;
-    background-color: #f9f9f9;
-}
-
-.batch-card {
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 800px;
-    padding: 20px;
-    text-align: center;
-}
-
-.batch-title {
-    font-size: 24px;
-    margin-bottom: 15px;
-    color: #333;
-    text-transform: uppercase;
-}
-
-.batch-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-}
-
-.batch-table thead {
-    background-color: #87CEFA;
-    color: white;
-}
-
-.batch-table th, .batch-table td {
-    padding: 10px;
-    text-align: center;
-    border: 1px solid #ddd;
-}
-
-.batch-table tbody tr:nth-child(odd) {
-    background-color: #f2f2f2;
-}
-
-.batch-table tbody tr:hover {
-    background-color: #d7ecff;
-}
-
-
 
 
 
@@ -629,3 +427,90 @@ h1 {
         margin-bottom: 20px;
     }
 }
+
+
+
+
+/* Flex container for event summary */
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 40px 20px;
+    margin-left: 250px;
+    margin-right: 50px;
+}
+
+/* Individual event section */
+.event-section-u, .event-section {
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    margin-right: 20px;
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Remove margin for last section */
+.event-section-u:last-child, .event-section:last-child {
+    margin-right: 0;
+}
+
+.event-section:hover {
+    transform: scale(1.05);
+}
+
+.section-title {
+    font-size: 30px;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.section-description {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .flex-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .event-section-u, .event-section {
+        margin-bottom: 20px;
+        max-width: 90%;
+    }
+
+    .section-title {
+        font-size: 20px;
+    }
+
+    .section-description {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .flex-container {
+        flex-direction: column;
+    }
+
+    .event-section-u, .event-section {
+        margin-bottom: 20px;
+        width: 100%;
+    }
+
+    .section-title {
+        font-size: 18px;
+    }
+
+    .section-description {
+        font-size: 16px;
+    }
+}
+

@@ -2,8 +2,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>User Home</title>
-    <link rel="stylesheet" th:href="@{/css/userHome.css}">
+    <title>Event List ALL</title>
+    <link rel="stylesheet" th:href="@{/css/navAndSide.css}">
 </head>
 <body>
 <nav class="navbar">
@@ -36,7 +36,8 @@
         <li>
             Events
             <ul class="submenu">
-                <li><a th:href="@{/eventAll}">Event List</a></li>
+                <li><a th:href="@{/eventList}">Event List</a></li>
+                <li><a th:href="@{/eventForm}">Create Event</a></li>
 
             </ul>
         </li>
@@ -47,6 +48,7 @@
             Expense
             <ul class="submenu">
                 <li><a th:href="@{/expenseShow}">Expense info</a></li>
+                <li><a th:href="@{/expenseForm}">Create new Expense</a></li>
 
             </ul>
         </li>
@@ -56,7 +58,7 @@
         <li>
             Member
             <ul class="submenu">
-                <li><a th:href="@{/usershowPage}">Members Info</a></li>
+                <li><a th:href="@{/usershowPage}">Current Student</a></li>
                 <li><a th:href="@{/}">Teacher</a></li>
 
             </ul>
@@ -64,30 +66,6 @@
     </ul>
 </div>
 
-<div class="flex-container">
-    <section class="event-section-user">
-        <div class="user-container">
-            <!-- Left Side: User Information -->
-            <div class="section-container-user">
-                <p class="user-name" th:text="${User.name}">0</p>
-                <p class="user-info">Batch: <span th:text="${User.batch}">0</span></p>
-                <p class="user-info">Session: <span th:text="${User.session}">0</span></p>
-                <p class="user-info">Email: <span th:text="${User.email}">0</span></p>
-                <p class="user-info">Mobile: <span th:text="${User.mobile}">0</span></p>
-            </div>
-
-            <!-- Right Side: Profile Picture -->
-            <div class="user-details">
-                <img
-                        class="user-profile-pic"
-                        th:src="@{${User.Pic}}"
-                        alt="User Profile Picture"
-                        width="150" height="150">
-            </div>
-        </div>
-    </section>
-
-</div>
 
 <h1 >Upcoming Events</h1>
 
@@ -114,44 +92,43 @@
                 <p class="info">Registration End:
                     <span th:text="${#dates.format(event.registrationEnd, 'dd/MM/yyyy')}"></span>
                 </p>
-            </div>
 
-            <!-- Hover Text -->
-            <div class="registration-hover" onclick="showRegistrationForm()">
-                Registration
             </div>
         </div>
     </div>
 </div>
 
-<!-- Registration Form -->
-<div id="registration-form-container" class="registration-form-hidden">
-    <form id="registration-form">
-        <h3>Event Registration</h3>
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-        <label for="phone">Phone:</label>
-        <input type="tel" id="phone" name="phone" required>
-        <button type="submit">Submit</button>
-        <button type="button" onclick="closeRegistrationForm()">Close</button>
-    </form>
+
+<h1 >Completed Events</h1>
+
+<div class="events-container">
+
+    <div class="item-container" th:each="event : ${eventAll}">
+        <div class="event-info">
+            <p class="title" th:text="${event.name}">Event Name</p>
+            <div class="separator"></div>
+            <p class="info" th:text="${event.fee}">Fee</p>
+
+            <div class="additional-info">
+                <p class="info">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span th:text="${event.venue}">Venue</span>
+                </p>
+                <p class="info">
+                    <i class="far fa-calendar-alt"></i>
+                    <span th:text="${#dates.format(event.eventDate, 'EEEE dd-MM-yyyy')}">Date</span>
+                </p>
+                <p class="info">Registration Start:
+                    <span th:text="${#dates.format(event.registrationStart, 'dd/MM/yyyy')}"></span>
+                </p>
+                <p class="info">Registration End:
+                    <span th:text="${#dates.format(event.registrationEnd, 'dd/MM/yyyy')}"></span>
+                </p>
+
+            </div>
+        </div>
+    </div>
 </div>
-
-<script>
-
-    // Show the registration form
-    function showRegistrationForm() {
-        document.getElementById('registration-form-container').style.display = 'block';
-    }
-
-    // Close the registration form
-    function closeRegistrationForm() {
-        document.getElementById('registration-form-container').style.display = 'none';
-    }
-
-</script>
 
 
 

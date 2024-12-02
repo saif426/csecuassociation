@@ -19,4 +19,15 @@ public interface UserRepository extends JpaRepository<User, Integer> {
             "ORDER BY u.batch, u.studentId")
     List<Object[]> findDistinctUsersGroupedByBatch();
 
+
+    List<User> findByBatch(int batch);
+
+    List<User> findAll();
+
+    @Query("SELECT DISTINCT u.studentId, u.name, u.batch, u.session, u.email, u.mobile " +
+            "FROM User u " +
+            "ORDER BY u.batch, u.studentId")
+    List<Object[]> findUsersGroupedByBatch();
+
+
 }

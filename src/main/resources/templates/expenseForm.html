@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Event Form</title>
+    <title>Expense Form</title>
     <link rel="stylesheet" th:href="@{/css/navAndSide.css}">
     <link rel="stylesheet" th:href="@{/css/eventForm.css}">
 
@@ -61,7 +61,7 @@
         <li>
             Member
             <ul class="submenu">
-                <li><a th:href="@{/usershowPage}">Current Student</a></li>
+                <li><a th:href="@{/}">Current Student</a></li>
                 <li><a th:href="@{/}">Teacher</a></li>
 
             </ul>
@@ -71,50 +71,42 @@
 
 
 <div class="container">
-    <form th:action="@{/eventSave}" th:object="${event}" method="post">
-        <h2>Create New Event</h2>
+    <form th:action="@{/expenseSave}" th:object="${expense}" method="post">
+        <h2>Create New Expense</h2>
+
+        <!-- Event Name -->
         <div class="form-group">
-            <label for="name">Event Name:</label>
-            <input type="text" id="name" name="name" required>
+            <label for="eventName">Event Name:</label>
+            <input type="text" id="eventName" name="eventName"  required>
         </div>
+
+        <!-- Amount -->
         <div class="form-group">
-            <label for="fee">Event Fee:</label>
-            <input type="text" id="fee" name="fee" required>
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" name="amount"   required>
         </div>
+
+        <!-- Expense Date -->
         <div class="form-group">
-            <label for="venue">Event Venue:</label>
-            <input type="text" id="venue" name="venue" required>
+            <label for="expenseDate">Expense Date:</label>
+            <input type="datetime-local" id="expenseDate" name="expenseDate"  required>
         </div>
-        <div class="form-group">
-            <label for="eventDate">Event Date:</label>
-            <input type="datetime-local" id="eventDate" name="eventDate" required>
-        </div>
-        <div class="form-group">
-            <label for="registrationStart">Registration Start:</label>
-            <input type="datetime-local" id="registrationStart" name="registrationStart" required>
-        </div>
-        <div class="form-group">
-            <label for="registrationEnd">Registration End:</label>
-            <input type="datetime-local" id="registrationEnd" name="registrationEnd" required>
-        </div>
+
+        <!-- Submit Button -->
         <button type="submit">Submit</button>
     </form>
 </div>
+
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-flatpickr("#eventDate", {
-    dateFormat: "Y-m-d H:i" // MySQL date format
-});
-flatpickr("#registrationStart", {
-enableTime: true,
-dateFormat: "Y-m-d H:i" // MySQL datetime format
-});
-flatpickr("#registrationEnd", {
-enableTime: true,
-dateFormat: "Y-m-d H:i" // MySQL datetime format
-});
-});
+    document.addEventListener('DOMContentLoaded', function () {
+        // Initialize flatpickr for expenseDate
+        flatpickr("#expenseDate", {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i" // MySQL datetime format
+        });
+    });
 </script>
 
-  </body>
-  </html>
+
+</body>
+</html>

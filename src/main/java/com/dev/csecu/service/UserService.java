@@ -49,7 +49,7 @@ public class UserService {
         return users;
     }
 
-    public List<User> getAllUsersGroupedByBatch() {
+    public List<User> getCRGroupedByBatch() {
         List<Object[]> results = userRepository.findDistinctUsersGroupedByBatch();
 
         List<User> users = results.stream()
@@ -69,6 +69,26 @@ public class UserService {
         users.forEach(user -> {
             System.out.println("Distinct User: " + user.getName() + " in Batch " + user.getBatch());
         });
+
+        return users;
+    }
+    public List<User> getAllUsersGroupedByBatch() {
+        List<Object[]> results = userRepository.findUsersGroupedByBatch();
+
+        List<User> users = results.stream()
+                .map(row -> {
+                    User user = new User();
+                    user.setStudentId((Integer) row[0]);
+                    user.setName((String) row[1]);
+                    user.setBatch((Integer) row[2]);
+                    user.setSession((String) row[3]);
+                    user.setEmail((String) row[4]);
+                    user.setMobile((String) row[5]);
+                    return user;
+                })
+                .collect(Collectors.toList());
+
+
 
         return users;
     }

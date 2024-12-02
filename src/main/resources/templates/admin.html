@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Member Sign Up Form</title>
-    <link rel="stylesheet" th:href="@{/css/navAndSide.css}">
+    <link rel="stylesheet" th:href="@{/css/adminHome.css}">
 </head>
 <body>
 <nav class="navbar">
@@ -31,12 +31,13 @@
 
 </nav>
 
+
 <div class="sidebar">
     <ul>
         <li>
             Events
             <ul class="submenu">
-                <li><a th:href="@{/eventList}">Event List</a></li>
+                <li><a th:href="@{/eventAll}">Event List</a></li>
                 <li><a th:href="@{/eventForm}">Create Event</a></li>
 
             </ul>
@@ -58,13 +59,42 @@
         <li>
             Member
             <ul class="submenu">
-                <li><a th:href="@{/}">Current Student</a></li>
+                <li><a th:href="@{/usershowPage}">Members Info</a></li>
                 <li><a th:href="@{/}">Teacher</a></li>
 
             </ul>
         </li>
     </ul>
 </div>
+
+
+
+<div class="flex-container-user">
+    <section class="event-section-userAdmin">
+        <div class="user-container">
+            <!-- Left Side: User Information -->
+            <div class="section-container-user">
+                <p class="user-name" th:text="${User.name}">0</p>
+                <p class="user-info">Batch: <span th:text="${User.batch}">0</span></p>
+                <p class="user-info">Session: <span th:text="${User.session}">0</span></p>
+                <p class="user-info">Email: <span th:text="${User.email}">0</span></p>
+                <p class="user-info">Mobile: <span th:text="${User.mobile}">0</span></p>
+            </div>
+
+            <!-- Right Side: Profile Picture -->
+            <div class="user-details">
+                <img
+                        class="user-profile-pic"
+                        th:src="@{${User.Pic}}"
+                        alt="User Profile Picture"
+                        width="150" height="150">
+            </div>
+        </div>
+    </section>
+</div>
+
+
+
 
 <div class="flex-container">
     <section class="event-section-u">
@@ -97,6 +127,7 @@
         </div>
     </section>
 </div>
+
 
 <h1 >Upcoming Events</h1>
 

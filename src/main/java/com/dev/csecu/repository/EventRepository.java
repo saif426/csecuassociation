@@ -13,4 +13,7 @@ public interface EventRepository extends JpaRepository<Event,Long> {
     @Query("SELECT e FROM Event e WHERE e.eventDate > CURRENT_TIMESTAMP")
     List<Event> findUpcomingEvents();
 
+    @Query("SELECT e FROM Event e WHERE e.eventDate < CURRENT_TIMESTAMP")
+    List<Event> findCompletedEvents();
+
 }

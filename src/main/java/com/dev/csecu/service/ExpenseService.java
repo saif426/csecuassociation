@@ -1,5 +1,6 @@
 package com.dev.csecu.service;
 
+import com.dev.csecu.entity.EventExpenseDTO;
 import com.dev.csecu.entity.Expense;
 import com.dev.csecu.entity.ExpenseYearlySummary;
 import com.dev.csecu.repository.ExpenseRepository;
@@ -38,4 +39,11 @@ public class ExpenseService {
     public List<ExpenseYearlySummary> getExpenseSummaryByYear() {
         return expenseRepository.getExpenseSummaryByYear();
     }
+
+
+    public List<EventExpenseDTO> getEventExpenses() {
+        return expenseRepository.findExpensesByevent();
+    }
+
+
 }

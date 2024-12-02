@@ -93,6 +93,17 @@ public class StudentController {
         model.addAttribute("events", events);
         return "eventList"; // Return the name of the Thymeleaf template to render
     }
+    @GetMapping("/eventAll")
+    public String showAllEvents(Model model) {
+        List<Event> events = eventRepository.findUpcomingEvents();
+        model.addAttribute("events", events);
+
+        List<Event> eventAll = eventRepository.findCompletedEvents();
+        model.addAttribute("eventAll", eventAll);
+
+        return "eventListAll"; // Return the name of the Thymeleaf template to render
+    }
+
 
 
 
@@ -122,22 +133,25 @@ public class StudentController {
 
         int u_Id=Integer.parseInt(userId);
         String pass=password;
-        long totalUsers = userRepository.count();
-        long totalEvents = eventRepository.count();
-        int totalExpense=expenseService.getTotalExpense();
-        model.addAttribute("totalUsers", totalUsers);
-        model.addAttribute("totalEvents", totalEvents);
-        model.addAttribute("totalExpense", totalExpense);
+
         User u1= userRepository.findUserByStudentId(u_Id);
 
         List<Event> events = eventRepository.findUpcomingEvents();
         model.addAttribute("events", events);
             if(u1!=null && pass.equals(u1.getPassword()) && u1.getRole()==1)
             {
+                long totalUsers = userRepository.count();
+                long totalEvents = eventRepository.count();
+                int totalExpense=expenseService.getTotalExpense();
+                model.addAttribute("totalUsers", totalUsers);
+                model.addAttribute("totalEvents", totalEvents);
+                model.addAttribute("totalExpense", totalExpense);
+                model.addAttribute("User", u1);
                 return "admin";
             }
             else if(u1!=null && pass.equals(u1.getPassword()) && u1.getRole()==0)
             {
+                model.addAttribute("User", u1);
                 return "user";
             }
             else {
@@ -192,7 +206,13 @@ public String registrationSave(@RequestParam("eventId") Long eventId,Model model
         List<ExpenseYearlySummary> expenseSummaryByYear = expenseService.getExpenseSummaryByYear();
 
         model.addAttribute("expenseSummaryByYear", expenseSummaryByYear);
+
+        List<EventExpenseDTO> eventExpenses = expenseService.getEventExpenses();
+        model.addAttribute("eventExpenses", eventExpenses);
         return "expenseCert";
+
+
+
     }
 
 
@@ -231,7 +251,7 @@ public String registrationSave(@RequestParam("eventId") Long eventId,Model model
     @GetMapping("/showBatch")
     public String showBatchRepresentative(Model model)
     {
-        List<User> users = userService.getAllUsersGroupedByBatch();
+        List<User> users = userService.getCRGroupedByBatch();
 
         Map<Integer, List<User>> groupedUsers = users.stream()
                 .collect(Collectors.groupingBy(User::getBatch));
@@ -246,6 +266,33 @@ public String registrationSave(@RequestParam("eventId") Long eventId,Model model
 
 
     }
+
+    @GetMapping("/usershowPage")
+    public String showBatchSelectionPage(Model model) {
+        List<User> users = userService.getAllUsersGroupedByBatch();
+
+        Map<Integer, List<User>> groupedUsers = users.stream()
+                .collect(Collectors.groupingBy(User::getBatch));
+
+        groupedUsers.forEach((batch, userList) -> {
+            System.out.println("Batch " + batch + ": " + userList.size() + " students");
+            userList.forEach(user -> System.out.println("  Student: " + user.getName()));
+        });
+
+        model.addAttribute("groupedUsers", groupedUsers);
+        return "userShow";
+
+    }
+
+    @GetMapping("/getUsers")
+    @ResponseBody
+    public List<User> getUsers(@RequestParam String batch) {
+        if ("None".equals(batch)) {
+            return userRepository.findAll();
+        }
+        return userRepository.findByBatch(Integer.parseInt(batch));
+    }
+
 
 }
 

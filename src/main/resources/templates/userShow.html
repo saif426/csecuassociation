@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Show </title>
+    <link rel="stylesheet" th:href="@{/css/navAndSide.css}">
+
+</head>
+<body>
+<nav class="navbar">
+    <div class="logo-container">
+        <img class="logo" th:src="@{/images/culogo.png}" alt="CU Logo">
+        <div class="logo-text">
+            <p>COMPUTER SCIENCE AND ENGINEERING</p>
+            <p>UNIVERSITY OF CHITTAGONG</p>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="dropdown">
+        <button class="dropdown-toggle">About Us</button>
+        <ul class="dropdown-menu">
+            <li><a th:href="@{/showVision}">Vision and Mission</a></li>
+            <li><a th:href="@{/showHistory}">Our History</a></li>
+            <li><a th:href="@{/showBatch}">Batch Representative</a></li>
+
+        </ul>
+    </div>
+
+</nav>
+
+<div class="sidebar">
+    <ul>
+        <li>
+            Events
+            <ul class="submenu">
+                <li><a th:href="@{/eventAll}">Event List</a></li>
+                <li><a th:href="@{/eventForm}">Create Event</a></li>
+
+            </ul>
+        </li>
+    </ul>
+
+    <ul>
+        <li>
+            Expense
+            <ul class="submenu">
+                <li><a th:href="@{/expenseShow}">Expense info</a></li>
+                <li><a th:href="@{/expenseForm}">Create new Expense</a></li>
+
+            </ul>
+        </li>
+    </ul>
+
+    <ul>
+        <li>
+            Member
+            <ul class="submenu">
+                <li><a th:href="@{/usershowPage}">Members Info</a></li>
+                <li><a th:href="@{/}">Teacher</a></li>
+
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div class="batch-info-container">
+    <div th:each="batchEntry : ${groupedUsers}" class="batch-card">
+        <h2 class="batch-title">Batch <span th:text="${batchEntry.key}"></span></h2>
+        <table class="batch-table">
+            <thead>
+            <tr>
+                <th>Student ID</th>
+                <th>Name</th>
+                <th>Session</th>
+                <th>Email</th>
+                <th>Mobile</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${batchEntry.value}">
+                <td th:text="${user.studentId}"></td>
+                <td th:text="${user.name}"></td>
+                <td th:text="${user.session}"></td>
+                <td th:text="${user.email}"></td>
+                <td th:text="${user.mobile}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
