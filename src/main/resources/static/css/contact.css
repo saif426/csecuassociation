@@ -131,7 +131,7 @@
 
 /* Container layout for larger section */
 .section-container-m {
-    min-height: 77vh; /* Adjusted height */
+    min-height: 40vh; /* Adjusted height */
     font-size: 16px;
     background: #eee;
     color: #777;
@@ -155,6 +155,20 @@
     text-align: center;
 }
 
+.contact-table {
+    width: 80%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.contact-table td {
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+.contact-table td:first-child {
+    font-weight: bold;
+}
 
 
 footer {

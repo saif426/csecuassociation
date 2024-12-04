@@ -8,10 +8,13 @@ import com.dev.csecu.repository.UserRepository;
 import com.dev.csecu.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
+import org.springframework.boot.autoconfigure.pulsar.PulsarProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.math.BigDecimal;
@@ -45,6 +48,9 @@ public class StudentController {
     private EventRepository eventRepository;
     @Autowired
     private ExpenseRepository expenseRepository;
+    @Autowired
+    private SubmenuService submenuService;
+
 
 
     @GetMapping("/login")
@@ -59,6 +65,10 @@ public class StudentController {
     {
          return "login";
     }
+
+
+
+
 
 
 
@@ -245,6 +255,12 @@ public String registrationSave(@RequestParam("eventId") Long eventId,Model model
     public String showVisionAndMission()
     {
         return "vision";
+    }
+
+    @GetMapping("/showContact")
+    public String showcontact()
+    {
+        return "contact";
     }
 
 
