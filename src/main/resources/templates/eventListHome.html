@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vision and Mission</title>
+    <link rel="stylesheet" th:href="@{/css/event.css}">
+    <style>
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar">
+    <div class="logo-container">
+        <img class="logo" th:src="@{/images/culogo.png}" alt="CU Logo">
+        <div class="logo-text">
+            <p>COMPUTER SCIENCE AND ENGINEERING</p>
+            <p>UNIVERSITY OF CHITTAGONG</p>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <button class="dropdown-toggle">Event</button>
+        <ul class="dropdown-menu">
+            <li><a th:href="@{/upEventShowHome}">Upcoming Event</a></li>
+
+        </ul>
+    </div>
+
+    <div class="dropdown">
+        <button class="dropdown-toggle" onclick="redirectToLogin()">Login</button>
+    </div>
+
+
+    <div class="dropdown">
+        <button class="dropdown-toggle">About Us</button>
+        <ul class="dropdown-menu">
+            <li><a th:href="@{/showVision}">Vision and Mission</a></li>
+            <li><a th:href="@{/showHistory}">Our History</a></li>
+            <li><a th:href="@{/showBatch}">Batch Representative</a></li>
+            <li><a th:href="@{/showContact}">Contact Us</a></li>
+
+        </ul>
+    </div>
+
+</nav>
+
+
+<h1 >Upcoming Events</h1>
+
+<div class="events-container">
+
+    <div class="item-container" th:each="event : ${events}">
+        <div class="event-info">
+            <p class="title" th:text="${event.name}">Event Name</p>
+            <div class="separator"></div>
+            <p class="info" th:text="${event.fee}">Fee</p>
+
+            <div class="additional-info">
+                <p class="info">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span th:text="${event.venue}">Venue</span>
+                </p>
+                <p class="info">
+                    <i class="far fa-calendar-alt"></i>
+                    <span th:text="${#dates.format(event.eventDate, 'EEEE dd-MM-yyyy')}">Date</span>
+                </p>
+                <p class="info">Registration Start:
+                    <span th:text="${#dates.format(event.registrationStart, 'dd/MM/yyyy')}"></span>
+                </p>
+                <p class="info">Registration End:
+                    <span th:text="${#dates.format(event.registrationEnd, 'dd/MM/yyyy')}"></span>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<h1 >Completed Events</h1>
+
+<div class="events-container">
+
+    <div class="item-container" th:each="event : ${eventAll}">
+        <div class="event-info">
+            <p class="title" th:text="${event.name}">Event Name</p>
+            <div class="separator"></div>
+            <p class="info" th:text="${event.fee}">Fee</p>
+
+            <div class="additional-info">
+                <p class="info">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span th:text="${event.venue}">Venue</span>
+                </p>
+                <p class="info">
+                    <i class="far fa-calendar-alt"></i>
+                    <span th:text="${#dates.format(event.eventDate, 'EEEE dd-MM-yyyy')}">Date</span>
+                </p>
+                <p class="info">Registration Start:
+                    <span th:text="${#dates.format(event.registrationStart, 'dd/MM/yyyy')}"></span>
+                </p>
+                <p class="info">Registration End:
+                    <span th:text="${#dates.format(event.registrationEnd, 'dd/MM/yyyy')}"></span>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+    function redirectToLogin() {
+        window.location.href = '/login';
+    }
+</script>
+
+
+
+
+<footer>
+    <div class="footer-content">
+        <p class="developer">Developed by Fahmida</p>
+    </div>
+</footer>
+
+
+</body>
+</html>

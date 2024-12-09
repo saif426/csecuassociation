@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Expense Summary</title>
     <!-- Include Chart.js -->
-    <link rel="stylesheet" th:href="@{/css/incomeExpenseCert.css}">
+    <link rel="stylesheet" th:href="@{/css/navAndSide.css}">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -50,49 +50,40 @@
     </ul>
 </div>
 
-
+<!-- Main content area -->
 <div class="main-content-c">
     <div class="charts-container">
+        <!-- Chart 1 -->
         <div class="chart-container">
-            <canvas id="yearWiseChart"></canvas>
-            <p class="chart-description">Year-wise Income And Expense</p>
+            <canvas id="expenseChart" width="300" height="300"></canvas>
         </div>
-        <div class="chart-container">
-            <canvas id="eventWiseChart"></canvas>
-            <p class="chart-description">Event-wise Income And Expense</p>
 
+        <!-- Chart 2 -->
+        <div class="chart-container">
+            <canvas id="expenseChart2" width="400" height="300"></canvas>
         </div>
     </div>
 </div>
 
 <script th:inline="javascript">
-    /* Data for Year-wise Chart */
+    /* Chart 1: Expense Summary by Year */
     var years = /*[[${expenseSummaryByYear.![year]}]]*/ [];
-    var expenseAmounts = /*[[${expenseSummaryByYear.![totalAmount]}]]*/ [];
-    var incomeAmounts = /*[[${incomeSummaryByYear.![totalAmount]}]]*/ [];
+    var amounts = /*[[${expenseSummaryByYear.![totalAmount]}]]*/ [];
 
-    var ctxYearWise = document.getElementById('yearWiseChart').getContext('2d');
-    new Chart(ctxYearWise, {
+    var ctx1 = document.getElementById('expenseChart').getContext('2d');
+    var chartData1 = {
+        labels: years,
+        datasets: [{
+            label: 'Total Expense Per Year',
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1,
+            data: amounts
+        }]
+    };
+    new Chart(ctx1, {
         type: 'bar',
-        data: {
-            labels: years,
-            datasets: [
-                {
-                    label: 'Total Expense',
-                    backgroundColor: '#16736a',
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    borderWidth: 1,
-                    data: expenseAmounts
-                },
-                {
-                    label: 'Total Income',
-                    backgroundColor: '#161973',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1,
-                    data: incomeAmounts
-                }
-            ]
-        },
+        data: chartData1,
         options: {
             responsive: true,
             maintainAspectRatio: false,
@@ -122,38 +113,25 @@
             }
         }
     });
-</script>
 
-
-
-<script th:inline="javascript">
-    /* Data for Event-wise Chart */
+    /* Chart 2: Expense Summary by Event */
     var events = /*[[${eventExpenses.![eventName]}]]*/ [];
-    var eventExpenseAmounts = /*[[${eventExpenses.![totalAmount]}]]*/ [];
-    var eventIncomeAmounts = /*[[${eventIncome.![totalAmount]}]]*/ [];
+    var eventAmounts = /*[[${eventExpenses.![totalAmount]}]]*/ [];
 
-    var ctxEventWise = document.getElementById('eventWiseChart').getContext('2d');
-    new Chart(ctxEventWise, {
+    var ctx2 = document.getElementById('expenseChart2').getContext('2d');
+    var chartData2 = {
+        labels: events,
+        datasets: [{
+            label: 'Total Expense per Event',
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1,
+            data: eventAmounts
+        }]
+    };
+    new Chart(ctx2, {
         type: 'bar',
-        data: {
-            labels: events,
-            datasets: [
-                {
-                    label: 'Total Expense',
-                    backgroundColor: '#18edca',
-                    borderColor: 'rgba(255, 159, 64, 1)',
-                    borderWidth: 1,
-                    data: eventExpenseAmounts
-                },
-                {
-                    label: 'Total Income',
-                    backgroundColor: '#121799',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 1,
-                    data: eventIncomeAmounts
-                }
-            ]
-        },
+        data: chartData2,
         options: {
             responsive: true,
             maintainAspectRatio: false,
@@ -184,7 +162,6 @@
         }
     });
 </script>
-
 
 </body>
 </html>

@@ -1,11 +1,11 @@
 package com.dev.csecu.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Setter
@@ -19,4 +19,13 @@ public class Menu {
 
     @Column(name = "name", nullable = false)
     private String name; // Name of the menu item
+
+    @OneToMany(mappedBy = "menu", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Submenu> submenus = new ArrayList<>();
+
+    // Getters and Setters
+    public void addSubmenu(Submenu submenu) {
+        submenus.add(submenu);
+        submenu.setMenu(this);
+    }
 }

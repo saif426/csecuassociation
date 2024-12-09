@@ -7,10 +7,11 @@
     <link rel="stylesheet" th:href="@{/css/login.css}">
 </head>
 <body>
+
 <div class="background">
     <div class="login-container">
         <h1>CSE CU ASSOCIATION</h1>
-        <form th:action="@{/login}" method="post" id="loginForm">
+        <form th:action="@{/performlogin}" method="post" id="loginForm">
             <div class="input-group">
                 <label for="userId">User ID:</label>
                 <input type="text" id="userId" name="userId" required>
@@ -20,7 +21,7 @@
                 <input type="password" id="password" name="password" required>
             </div>
 
-            <!-- CAPTCHA Section
+            <!-- CAPTCHA Section -->
             <div id="captcha" class="form_div">
                 <div class="captcha_row">
                     <div class="preview">
@@ -34,7 +35,7 @@
                     <span id="captchaError" style="color: red; display: none;">Incorrect CAPTCHA. Please try again.</span>
                 </div>
             </div>
--->
+
             <!-- Hidden Input to Store CAPTCHA Answer -->
             <input type="hidden" id="captcha_answer" name="captcha_answer">
 
@@ -46,6 +47,13 @@
                 <a th:href="@{/memberSignForm}" class="register-link">Sign Up</a>
             </div>
         </form>
+        <div th:if="${param.error}">
+            <p style="color: red;">Invalid username or password.</p>
+        </div>
+
+        <div th:if="${param.logout}">
+            <p style="color: green;">You have been logged out successfully.</p>
+        </div>
     </div>
 </div>
 

@@ -17,52 +17,33 @@
 
 
 
-
-
     <div class="dropdown">
-        <button class="dropdown-toggle">About Us</button>
-        <ul class="dropdown-menu">
-            <li><a th:href="@{/showVision}">Vision and Mission</a></li>
-            <li><a th:href="@{/showHistory}">Our History</a></li>
-            <li><a th:href="@{/showBatch}">Batch Representative</a></li>
+        <!-- User Photo -->
+        <button class="dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" style="border: none; background: none;">
+            <img th:src="@{${User.Pic}}" alt="User Photo" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+        </button>
 
-
+        <!-- Dropdown Menu -->
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <li><a class="dropdown-item" th:href="@{/profileEdit}">Edit Profile</a></li>
+            <li><a class="dropdown-item" th:href="@{/logout}">Log Out</a></li>
         </ul>
     </div>
+
 
 </nav>
 
 
 <div class="sidebar">
     <ul>
-        <li>
-            Events
+        <!-- Iterate through the menus to display dynamically -->
+        <li th:each="menu : ${menus}">
+            <span th:text="${menu.name}"></span>
             <ul class="submenu">
-                <li><a th:href="@{/eventAll}">Event List</a></li>
-                <li><a th:href="@{/eventForm}">Create Event</a></li>
-
-            </ul>
-        </li>
-    </ul>
-
-    <ul>
-        <li>
-            Expense
-            <ul class="submenu">
-                <li><a th:href="@{/expenseShow}">Expense info</a></li>
-                <li><a th:href="@{/expenseForm}">Create new Expense</a></li>
-
-            </ul>
-        </li>
-    </ul>
-
-    <ul>
-        <li>
-            Member
-            <ul class="submenu">
-                <li><a th:href="@{/usershowPage}">Members Info</a></li>
-                <li><a th:href="@{/}">Teacher</a></li>
-
+                <li th:each="submenu : ${menu.submenus}">
+                    <a th:href="@{${submenu.url}}"
+                       th:text="${submenu.name}"></a>
+                </li>
             </ul>
         </li>
     </ul>
@@ -124,6 +105,15 @@
             <br>
             <p class="section-description">
                 <strong th:text="${totalExpense}">0</strong>
+            </p>
+        </div>
+    </section>
+    <section class="event-section">
+        <div class="section-container-e">
+            <h1 class="section-title">Total Income</h1>
+            <br>
+            <p class="section-description">
+                <strong th:text="${totalIncome}">0</strong>
             </p>
         </div>
     </section>

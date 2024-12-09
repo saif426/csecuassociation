@@ -11,8 +11,8 @@ import java.util.Date;
 @Entity
 @Getter
 @Setter
-@Table(name = "expense")
-public class Expense {
+@Table(name = "income")
+public class Income {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,6 +23,6 @@ public class Expense {
     @Column(name = "amount", nullable = false)
     private BigDecimal amount;
 
-    @Column(name = "expense_date", nullable = false)
-    private Date expenseDate;
+    @Column(name = "income_date", nullable = false)
+    private Date incomeDate;
 }

@@ -6,6 +6,7 @@ import com.dev.csecu.repository.ExpenseRepository;
 import com.dev.csecu.repository.RegistrationRepository;
 import com.dev.csecu.repository.UserRepository;
 import com.dev.csecu.service.*;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
@@ -14,6 +15,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -33,6 +36,7 @@ public class StudentController {
     @Autowired
     private ExpenseService expenseService;
 
+
     @Autowired
     private RegistrationService registrationService;
 
@@ -50,7 +54,8 @@ public class StudentController {
     private ExpenseRepository expenseRepository;
     @Autowired
     private SubmenuService submenuService;
-
+    @Autowired
+    private IncomeService incomeService;
 
 
     @GetMapping("/login")
@@ -79,40 +84,7 @@ public class StudentController {
         dateFormat.setLenient(false);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
-    @GetMapping("/eventForm")
-    public String eventCreate()
-    {
-        return "eventForm";
-    }
 
-    @PostMapping("/eventSave")
-    public String eventSave(@ModelAttribute("event") Event event)
-    {
-        eventService.saveEvent(event);
-        return "redirect:/upEventShow";
-    }
-    @GetMapping("/eventShow")
-    public String showEvents(Model model) {
-        List<Event> events = eventService.eventList();
-        model.addAttribute("events", events);
-        return "eventList"; // Return the name of the Thymeleaf template to render
-    }
-    @GetMapping("/upEventShow")
-    public String showUpEvents(Model model) {
-        List<Event> events = eventRepository.findUpcomingEvents();
-        model.addAttribute("events", events);
-        return "eventList"; // Return the name of the Thymeleaf template to render
-    }
-    @GetMapping("/eventAll")
-    public String showAllEvents(Model model) {
-        List<Event> events = eventRepository.findUpcomingEvents();
-        model.addAttribute("events", events);
-
-        List<Event> eventAll = eventRepository.findCompletedEvents();
-        model.addAttribute("eventAll", eventAll);
-
-        return "eventListAll"; // Return the name of the Thymeleaf template to render
-    }
 
 
 
@@ -124,11 +96,20 @@ public class StudentController {
         return "memberForm";
     }
     @PostMapping("/userSignup")
-    public String userSignup(@ModelAttribute("User") User user,Model model)
+    public String userSignup(@ModelAttribute("User") User user,Model model,RedirectAttributes redirectAttributes)
     {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String hashedPassword = encoder.encode(user.getPassword());  // Hash the password
+
+        // Set the hashed password to the user object
+        user.setPassword(hashedPassword);
+
+
         userService.saveUser(user);
-        model.addAttribute("saveMessage", "User saved successfully!"); // Add a success message
-        return "login"; // Redirect to show save message
+        // Add success message
+        redirectAttributes.addFlashAttribute("successMessage", "Registration Successfully Done!");
+
+        return "redirect:/login"; // Redirect to show save message
     }
 
     @GetMapping("/showSaveMessage")
@@ -137,42 +118,69 @@ public class StudentController {
     }
 
 
-    @PostMapping("/login")
+
+
+
+    @PostMapping("/performlogin")
     public String processLogin(@RequestParam("userId") String userId,
-                               @RequestParam("password") String password, Model model) {
+                               @RequestParam("password") String password,
+                               Model model,
+                               HttpSession session) {
 
-        int u_Id=Integer.parseInt(userId);
-        String pass=password;
+        int u_Id = Integer.parseInt(userId);
+        String pass = password;
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-        User u1= userRepository.findUserByStudentId(u_Id);
-
+        User u1 = userRepository.findUserByStudentId(u_Id);
         List<Event> events = eventRepository.findUpcomingEvents();
         model.addAttribute("events", events);
-            if(u1!=null && pass.equals(u1.getPassword()) && u1.getRole()==1)
-            {
+
+        int userRole=u1.getRole();
+        List<Menu> menus = submenuService.getMenusForUser(userRole);
+        model.addAttribute("menus", menus);
+
+
+
+        if (u1 != null && encoder.matches(pass, u1.getPassword())) {
+            // Store user details in the session
+            session.setAttribute("loggedInUser", u1);
+
+            // Additional attributes for admin
+            if (u1.getRole() == 1) {
                 long totalUsers = userRepository.count();
                 long totalEvents = eventRepository.count();
-                int totalExpense=expenseService.getTotalExpense();
+                int totalExpense = expenseService.getTotalExpense();
+                int totalIncome=incomeService.getTotalIncome();
+
                 model.addAttribute("totalUsers", totalUsers);
                 model.addAttribute("totalEvents", totalEvents);
                 model.addAttribute("totalExpense", totalExpense);
+                model.addAttribute("totalIncome", totalIncome);
                 model.addAttribute("User", u1);
-                return "admin";
-            }
-            else if(u1!=null && pass.equals(u1.getPassword()) && u1.getRole()==0)
-            {
+
+                return "admin"; // Admin menu
+            } else if (u1.getRole() == 0) {
                 model.addAttribute("User", u1);
-                return "user";
+                return "user"; // User menu
             }
-            else {
-                // Handle authentication failure, maybe return an error page
-                model.addAttribute("error", "Incorrect UserId or Password");
-                return "login";
-            }
+        } else {
+            // Handle authentication failure
+            model.addAttribute("error", "Incorrect UserId or Password");
+            return "login"; // Redirect to login page
+        }
+
+        return "login"; // In case of unexpected behavior
     }
+
+
+
     @GetMapping("/userShow")
-    public String userShow(Model model)
-    {
+    public String userShow(HttpSession session, Model model) {
+
+
+        User u1=(User)session.getAttribute("loggedInUser");
+        model.addAttribute("User", u1);
+
         List<User> users = userService.userList();
         model.addAttribute("users", users);
         return "userList"; // Return the name of the Thymeleaf template to render
@@ -196,34 +204,6 @@ public String registrationSave(@RequestParam("eventId") Long eventId,Model model
     }
 
 
-    @GetMapping("/expenseForm")
-    public String expenseCreate()
-    {
-        return "expenseForm";
-    }
-    @PostMapping("/expenseSave")
-    public String expenseSave(@ModelAttribute("expense") Expense expense)
-    {
-        expenseService.saveExpense(expense);
-        return "redirect:/expenseShow";
-    }
-    @GetMapping("/expenseShow")
-    public String showExpenses(Model model) {
-        //List<Expense> expenses = expenseService.expenseList();
-        //model.addAttribute("expenses", expenses);
-       // return "expenseList"; // Return the name of the Thymeleaf template to render
-
-        List<ExpenseYearlySummary> expenseSummaryByYear = expenseService.getExpenseSummaryByYear();
-
-        model.addAttribute("expenseSummaryByYear", expenseSummaryByYear);
-
-        List<EventExpenseDTO> eventExpenses = expenseService.getEventExpenses();
-        model.addAttribute("eventExpenses", eventExpenses);
-        return "expenseCert";
-
-
-
-    }
 
 
 
@@ -236,12 +216,13 @@ public String registrationSave(@RequestParam("eventId") Long eventId,Model model
         return "registerUserList";
          // Redirect to a success page
     }
-    @GetMapping("/eventShowAdmin")
-    public String showEventAdmin(Model model) {
-        List<Event> events = eventService.eventList();
-        model.addAttribute("events", events);
-        return "eventListAdmin"; // Return the name of the Thymeleaf template to render
-    }
+
+
+
+
+
+
+
 
 
     @GetMapping("/showHistory")
@@ -264,6 +245,23 @@ public String registrationSave(@RequestParam("eventId") Long eventId,Model model
     }
 
 
+    @GetMapping("/logout")
+    public String logoutUser(HttpSession session)
+    {
+        session.invalidate();
+        return "login";
+    }
+
+
+
+
+
+
+
+
+
+
+
     @GetMapping("/showBatch")
     public String showBatchRepresentative(Model model)
     {
@@ -284,7 +282,16 @@ public String registrationSave(@RequestParam("eventId") Long eventId,Model model
     }
 
     @GetMapping("/usershowPage")
-    public String showBatchSelectionPage(Model model) {
+    public String showBatchSelectionPage(HttpSession session, Model model) {
+
+
+        User u1=(User)session.getAttribute("loggedInUser");
+        model.addAttribute("User", u1);
+        int userRole=u1.getRole();
+        List<Menu> menus = submenuService.getMenusForUser(userRole);
+        model.addAttribute("menus", menus);
+
+
         List<User> users = userService.getAllUsersGroupedByBatch();
 
         Map<Integer, List<User>> groupedUsers = users.stream()
@@ -308,6 +315,15 @@ public String registrationSave(@RequestParam("eventId") Long eventId,Model model
         }
         return userRepository.findByBatch(Integer.parseInt(batch));
     }
+
+
+
+
+
+
+
+// expense info
+
 
 
 }

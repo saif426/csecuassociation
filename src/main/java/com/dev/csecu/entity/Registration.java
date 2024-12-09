@@ -9,27 +9,28 @@ import java.util.Date;
 @Entity
 @Setter
 @Getter
+
 @Table(name = "registration")
-public class Registration  {
+public class Registration {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "studentid", nullable = false)
-    private Long studentId;
+    @ManyToOne
+    @JoinColumn(name = "event_id", referencedColumnName = "id", nullable = false)
+    private Event event;
 
-    @Column(name = "eventid", nullable = false)
-    private Long eventId;
+    @ManyToOne
+    @JoinColumn(name = "studentid", referencedColumnName = "StudentId", nullable = false)
+    private User student;
 
-    @Column(name = "registrationdate")
+    @Column(name = "fee", nullable = false)
+    private Long fee;
+
+    @Column(name = "registration_date", nullable = false)
     private Date registrationDate;
 
-    @Column(name = "email", nullable = false, length = 100)
-    private String email;
 
-    @Column(name = "student_name", nullable = false, length = 100)
-    private String name;
-
-    // Constructors, getters, and setters
 }
 

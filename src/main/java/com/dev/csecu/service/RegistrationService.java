@@ -22,8 +22,9 @@ public class RegistrationService {
 
     @Transactional
     public void saveRegistration(Registration registration) {
-        registration.setRegistrationDate(new Date());
+
         registrationRepository.save(registration);
+
 
     }
 

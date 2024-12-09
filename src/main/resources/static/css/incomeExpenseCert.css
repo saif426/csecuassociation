@@ -192,7 +192,110 @@
     z-index: 1000;
     position: relative;
 }
+/* Flex container for horizontal scrolling */
+.flex-container {
+    display: flex;
+    flex-wrap: nowrap; /* Prevent wrapping, enable horizontal scrolling */
+    overflow-x: auto; /* Enable horizontal scrolling */
+    gap: 10px; /* Space between sections */
+    padding: 10px; /* Padding around the container */
+    margin-left: 210px; /* Add margin to offset the sidebar's width (200px + 10px for spacing) */
+    scrollbar-width: thin; /* Slim scrollbar for Firefox */
+    scrollbar-color: #87ceeb #d3d3d3; /* Custom scrollbar colors */
+}
 
+/* Section for events */
+.event-section {
+    flex: 0 0 auto; /* Prevent sections from shrinking, allow scrolling */
+    width: 300px; /* Fixed width for sections */
+    text-align: center;
+    display: flex;
+    padding: 20px; /* Padding inside each section */
+    background: linear-gradient(145deg, #d3d3d3, #87ceeb); /* Gray to sky blue gradient */
+    margin: 10px; /* Space between sections */
+    flex-direction: column; /* Vertical content inside each section */
+    border-radius: 10px; /* Smooth rounded corners */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.1); /* Soft shadows */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animation for hover effect */
+}
+.event-section-u {
+    flex: 0 0 auto; /* Prevent sections from shrinking, allow scrolling */
+    width: 200px; /* Fixed width for sections */
+    text-align: center;
+    display: flex;
+    padding: 20px; /* Padding inside each section */
+    background: linear-gradient(145deg, #d3d3d3, #87ceeb); /* Gray to sky blue gradient */
+    margin: 10px; /* Space between sections */
+    flex-direction: column; /* Vertical content inside each section */
+    border-radius: 10px; /* Smooth rounded corners */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.1); /* Soft shadows */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animation for hover effect */
+}
+
+.event-section-user {
+    flex: 0 0 auto; /* Prevent sections from shrinking, allow scrolling */
+    width: 400px; /* Fixed width for sections */
+    text-align: center;
+    display: flex;
+    padding: 20px; /* Padding inside each section */
+    background: linear-gradient(145deg, #d3d3d3, #87ceeb); /* Gray to sky blue gradient */
+    margin: 10px; /* Space between sections */
+    flex-direction: column; /* Vertical content inside each section */
+    border-radius: 10px; /* Smooth rounded corners */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.1); /* Soft shadows */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animation for hover effect */
+}
+
+
+/* Hover effect for sections */
+.event-section:hover {
+    transform: translateY(-5px); /* Slight upward lift */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
+}
+
+/* Title Styling */
+.section-title {
+    font-size: 1.5em; /* Prominent title font size */
+    font-weight: bold;
+    margin-bottom: 15px; /* Space below the title */
+    color: #333; /* Darker text for contrast */
+    text-transform: uppercase; /* Uppercase for emphasis */
+    letter-spacing: 1.5px; /* Spacing between letters */
+    text-align: center;
+}
+
+/* Description Styling */
+.section-description {
+    font-size: 4em; /* Regular font size */
+    color: #555; /* Neutral text color */
+    line-height: 1.6; /* Increased line height for readability */
+    padding: 0 10px; /* Padding around the text */
+}
+
+/* Scrollbar customization for webkit browsers */
+.flex-container::-webkit-scrollbar {
+    height: 8px; /* Height of horizontal scrollbar */
+}
+
+.flex-container::-webkit-scrollbar-thumb {
+    background: #87ceeb; /* Sky blue scrollbar thumb */
+    border-radius: 10px; /* Rounded scrollbar thumb */
+}
+
+.flex-container::-webkit-scrollbar-track {
+    background: #d3d3d3; /* Gray scrollbar track */
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .flex-container {
+        margin-left: 0; /* Remove margin for smaller screens */
+    }
+
+    .event-section {
+        width: 250px; /* Smaller section width on mobile */
+    }
+}
 
 /* Events container styling */
 .events-container {
@@ -366,6 +469,106 @@ h1 {
     }
 }
 
+/* Flex container for the charts */
+/* Ensuring box-sizing includes padding and border */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+/* Ensure the charts and batch information are offset from the sidebar */
+.main-content-c {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: calc(100% - 200px); /* Adjust width based on sidebar width */
+    margin-left: 200px; /* Match the sidebar width */
+    margin-right: 200px;
+    padding: 20px;
+    box-sizing: border-box; /* Include padding in width/height calculations */
+}
+
+/* Flex container for the charts */
+.charts-container {
+    display: flex;
+    flex-direction: column; /* Stack charts vertically */
+    gap: 80px; /* Add spacing between charts */
+    align-items: center; /* Center charts horizontally */
+}
+
+/* Individual chart container */
+.chart-container {
+    width: 100%; /* Adjust to full width of container */
+    max-width: 600px; /* Set a maximum width */
+    height: 300px; /* Maintain a consistent height */
+    text-align: center;
+}
+/* Chart description styling */
+.chart-description {
+    margin-top: 10px; /* Add spacing between chart and description */
+    font-size: 20px; /* Adjust font size */
+    color: #555; /* Set text color */
+    font-weight: bold;
+
+}
+
+
+/* Batch Information Section */
+.batch-info-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding : 80px;
+    gap: 20px;
+    background-color: #f9f9f9;
+}
+
+.batch-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+    padding: 20px;
+    text-align: center;
+}
+
+.batch-title {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #333;
+    text-transform: uppercase;
+}
+
+.batch-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.batch-table thead {
+    background-color: #87CEFA;
+    color: white;
+}
+
+.batch-table th, .batch-table td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.batch-table tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+.batch-table tbody tr:hover {
+    background-color: #d7ecff;
+}
+
+
+
+
+
 /* Flex container to align items horizontally */
 .user-container {
     display: flex;
@@ -423,117 +626,4 @@ h1 {
         text-align: center; /* Center-align text on smaller screens */
         margin-bottom: 20px;
     }
-}
-
-
-/* Registration hover text */
-.registration-hover {
-    position: absolute;
-    bottom: 10px;
-    right: 15px;
-    background-color: #007bff;
-    color: white;
-    padding: 8px 12px;
-    border-radius: 4px;
-    font-size: 14px;
-    cursor: pointer;
-    display: none; /* Hidden by default */
-}
-
-.event-info:hover .registration-hover {
-    display: block; /* Show on hover */
-}
-
-
-/* Registration form container */
-#registration-form-container {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #ffffff;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 25px; /* Reduced padding */
-    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    display: none; /* Hidden by default */
-    width: 400px; /* Width remains the same */
-    min-height: 350px; /* Slightly decreased height */
-    font-family: 'Arial', sans-serif;
-    font-size: 16px;
-}
-
-/* Registration form inputs */
-#registration-form input {
-    display: block;
-    width: 100%;
-    margin-bottom: 12px; /* Slightly reduced margin for better spacing */
-    padding: 10px; /* Reduced padding for slightly smaller inputs */
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 14px;
-    background-color: #f9f9f9;
-    transition: border-color 0.3s ease;
-}
-
-#registration-form input:focus {
-    border-color: #28a745; /* Green border on focus */
-    outline: none;
-}
-
-/* Form buttons */
-#registration-form button {
-    margin-right: 12px; /* Slightly reduced margin */
-    padding: 10px 18px; /* Reduced padding */
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-}
-
-/* Submit button */
-#registration-form button[type="submit"] {
-    background-color: #28a745;
-    color: white;
-}
-
-#registration-form button[type="submit"]:hover {
-    background-color: #218838; /* Darker green on hover */
-}
-
-/* Close button */
-#registration-form button[type="button"] {
-    background-color: #dc3545;
-    color: white;
-}
-
-#registration-form button[type="button"]:hover {
-    background-color: #c82333; /* Darker red on hover */
-}
-
-/* Additional form heading styling */
-#registration-form h3 {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 24px;
-    color: #333;
-}
-
-/* Add some spacing between form elements */
-#registration-form label {
-    font-weight: bold;
-    margin-bottom: 5px;
-    display: block;
-    color: #555;
-}
-
-/* Apply a slight shadow effect to the form container */
-.registration-form-hidden {
-    display: none;
-}
-
-#registration-form-container {
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
 }
