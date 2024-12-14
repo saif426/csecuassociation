@@ -2,9 +2,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>User Show </title>
-    <link rel="stylesheet" th:href="@{/css/navAndSide.css}">
-
+    <title>Member Sign Up Form</title>
+    <link rel="stylesheet" th:href="@{/css/adminHome.css}">
 </head>
 <body>
 <nav class="navbar">
@@ -31,7 +30,6 @@
     </div>
 
 
-
 </nav>
 
 
@@ -51,33 +49,37 @@
 </div>
 
 
+<div id="edit-profile-form-container" class="edit-profile-form-hidden">
+    <form id="edit-profile-form" th:action="@{/updateProfile}" method="POST" enctype="multipart/form-data">
+        <!-- Student ID -->
+        <label for="studentId">Student ID:</label>
+        <input type="text" id="studentId" name="studentId" th:value="${User.studentId}" readonly required>
 
+        <!-- Name -->
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" th:value="${User.name}" required>
 
-<div class="batch-info-container">
-    <div th:each="batchEntry : ${groupedUsers}" class="batch-card">
-        <h2 class="batch-title">Batch <span th:text="${batchEntry.key}"></span></h2>
-        <table class="batch-table">
-            <thead>
-            <tr>
-                <th>Student ID</th>
-                <th>Name</th>
-                <th>Session</th>
-                <th>Email</th>
-                <th>Mobile</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="user : ${batchEntry.value}">
-                <td th:text="${user.studentId}"></td>
-                <td th:text="${user.name}"></td>
-                <td th:text="${user.session}"></td>
-                <td th:text="${user.email}"></td>
-                <td th:text="${user.mobile}"></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+        <!-- Email -->
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" th:value="${User.email}" required>
+
+        <!-- Phone -->
+        <label for="mobile">Phone:</label>
+        <input type="tel" id="mobile" name="mobile" th:value="${User.mobile}" required>
+
+        <!-- Password -->
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" placeholder="Enter new password" minlength="8">
+
+        <!-- Upload Profile Picture -->
+        <label for="profilePicture">Profile Picture:</label>
+        <input type="file" id="profilePicture" name="profilePicture" accept="image/*">
+
+        <!-- Submit Button -->
+        <button type="submit">Save Changes</button>
+    </form>
 </div>
+
 
 </body>
 </html>

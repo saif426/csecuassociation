@@ -97,6 +97,7 @@ public class EventController {
 
         List<Event> events = eventRepository.findUpcomingEvents();
         model.addAttribute("events", events);
+
         return "eventList"; // Return the name of the Thymeleaf template to render
     }
     @GetMapping("/eventAll")
@@ -115,6 +116,12 @@ public class EventController {
 
         List<Event> eventAll = eventRepository.findCompletedEvents();
         model.addAttribute("eventAll", eventAll);
+
+
+        if(userRole==1)
+        {
+            return "evenListAllAdmin";
+        }
 
         return "eventListAll"; // Return the name of the Thymeleaf template to render
     }
@@ -172,6 +179,7 @@ public class EventController {
         // Redirect to the event list page
         return "redirect:/eventAll";
     }
+
 
 
 

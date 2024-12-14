@@ -1,0 +1,279 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Navbar layout */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background: linear-gradient(to right, #B4B8B2, #87CEFA, #B4B8B2); /* Dark ash on both sides, light sky blue in the middle */
+    color: white;
+}
+
+/* Logo and text styling */
+.logo-container {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.logo {
+    height: 50px; /* Adjust size as needed */
+    margin-right: 15px;
+}
+
+.logo-text {
+    font-size: 16px; /* Adjust font size for readability */
+    color: white;
+}
+
+.logo-text p:last-child {
+    font-size: 14px; /* Smaller text for "UNIVERSITY OF CHITTAGONG" */
+    color: black; /* Black color for "UNIVERSITY OF CHITTAGONG" */
+}
+
+/* Dropdown styling */
+.dropdown {
+    position: relative;
+    margin-left: 1px; /* Space out the dropdowns */
+    margin-right: 10px;
+}
+
+.dropdown-toggle {
+    background-color: #444;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: #444;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    min-width: 150px;
+    z-index: 1000;
+}
+
+.dropdown-menu li {
+    width: 100%;
+}
+
+.dropdown-menu li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 10px 15px;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-menu li a:hover {
+    background-color: #555;
+}
+
+/* Show dropdown menu on hover */
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+/* Sidebar styling */
+.sidebar {
+    width: 200px;
+    height: 100vh; /* Full height */
+    background: linear-gradient(to bottom, #87CEFA, #B4B8B2); /* Gradient for a modern look */
+    position: fixed;
+    top: 0; /* Start at the top */
+    left: 0;
+    padding-top: 80px; /* Space to ensure it starts below the navbar */
+    overflow-y: auto;
+    border-right: 1px solid #ddd;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 500; /* Ensure proper stacking below navbar */
+}
+
+/* Main menu list */
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar ul li {
+    padding: 10px 20px;
+    cursor: pointer;
+    color: #333;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #f9f9f9; /* Light background for contrast */
+    border-radius: 8px; /* Rounded corners */
+    margin: 5px 10px; /* Spacing between items */
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+
+/* Hover effect for main menu */
+.sidebar ul li:hover {
+    background-color: #87CEFA; /* Highlight color on hover */
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow effect on hover */
+}
+
+/* Submenu styles */
+.sidebar ul li .submenu {
+    display: none;
+    padding-left: 20px; /* Indentation for submenus */
+}
+
+/* Show submenu on hover */
+.sidebar ul li:hover .submenu {
+    display: block;
+}
+
+/* Submenu items */
+.sidebar ul li .submenu li {
+    padding: 8px 20px; /* Match main menu padding */
+    font-size: 14px; /* Slightly smaller font size for submenus */
+    font-weight: normal; /* Normal weight for submenus */
+    color: #444; /* Slightly lighter text color for submenus */
+    background-color: #f4f4f4; /* Light background for submenus */
+    border-radius: 6px; /* Rounded corners for submenu */
+    margin: 3px 0; /* Space between submenu items */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Hover effect for submenu items */
+.sidebar ul li .submenu li:hover {
+    background-color: #87CEFA; /* Highlight color on hover */
+    color: white;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2); /* Subtle shadow effect */
+}
+
+/* Remove underline and match font styles */
+.sidebar ul li .submenu li a {
+    text-decoration: none;
+    color: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    display: block;
+    padding: 0;
+}
+
+/* Icons support for main menu */
+.sidebar ul li::before {
+    content: "▶"; /* Example icon (arrow) */
+    display: inline-block;
+    margin-right: 10px; /* Space for the icon */
+    color: #444; /* Icon color */
+    transition: transform 0.3s ease;
+}
+
+/* Rotate icon on hover */
+.sidebar ul li:hover::before {
+    transform: rotate(90deg); /* Rotate arrow on hover */
+    color: white; /* Match hover text color */
+}
+
+
+
+/* Ensure navbar overlaps sidebar */
+.navbar {
+    z-index: 1000;
+    position: relative;
+}
+
+/* General container styling */
+#edit-profile-form-container {
+    display: none; /* Initially hidden, you can toggle visibility using JavaScript */
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+/* Form field styling */
+#edit-profile-form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+#edit-profile-form input[type="text"],
+#edit-profile-form input[type="email"],
+#edit-profile-form input[type="tel"],
+#edit-profile-form input[type="password"],
+#edit-profile-form input[type="file"] {
+    width: calc(100% - 20px);
+    padding: 8px 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+#edit-profile-form input[type="text"]:read-only {
+    background-color: #e9e9e9;
+    cursor: not-allowed;
+}
+
+/* File input styling */
+#edit-profile-form input[type="file"] {
+    border: none;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+/* Submit button styling */
+#edit-profile-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#edit-profile-form button:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+    #edit-profile-form-container {
+        padding: 15px;
+    }
+
+    #edit-profile-form input[type="text"],
+    #edit-profile-form input[type="email"],
+    #edit-profile-form input[type="tel"],
+    #edit-profile-form input[type="password"],
+    #edit-profile-form input[type="file"] {
+        width: calc(100% - 16px);
+        font-size: 12px;
+    }
+
+    #edit-profile-form button {
+        font-size: 14px;
+    }
+}
+

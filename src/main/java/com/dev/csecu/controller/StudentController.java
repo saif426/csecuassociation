@@ -117,6 +117,17 @@ public class StudentController {
         return "saveMessage"; // This will be a separate HTML template to show the save message
     }
 
+    @GetMapping("/profileEdit")
+    public String profileeditPage(HttpSession session, Model model) {
+
+
+        User u1=(User)session.getAttribute("loggedInUser");
+        model.addAttribute("User", u1);
+
+
+        return "profileEditPage";
+    }
+
 
 
 
@@ -208,11 +219,18 @@ public String registrationSave(@RequestParam("eventId") Long eventId,Model model
 
 
     @PostMapping("/registrationInfo")
-    public String bookEvent(@RequestParam("eventId") Long eventId,Model model) {
+    public String bookEvent(@RequestParam("eventId") Long eventId,Model model, HttpSession session)
+    {
+        User u1=(User)session.getAttribute("loggedInUser");
+        model.addAttribute("User", u1);
+        int userRole=u1.getRole();
+        List<Menu> menus = submenuService.getMenusForUser(userRole);
+        model.addAttribute("menus", menus);
 
 
-        List<Registration> registerUser = registrationService.registerList(eventId);
-        model.addAttribute("registerUser", registerUser);
+        List<Object[]> result = registrationRepository.findRegisteredUsers(eventId);
+
+        model.addAttribute("registerUser", result);
         return "registerUserList";
          // Redirect to a success page
     }
